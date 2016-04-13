@@ -11,7 +11,8 @@
 + Windows 10 TP build 10061;
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
-+ Windows 10 RS1 build 14279.
++ Windows 10 RS1 build 14279;
++ Windows 10 RS1 build 14316.
 
 # Usage
 
