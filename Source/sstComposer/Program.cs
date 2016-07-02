@@ -27,10 +27,10 @@ namespace sstc
             return -1;
         }
 
-        static void PutSpaces(ref string s, int start)
+        static void PutSpaces(ref string s)
         {
             int sz = s.Length;
-            for (int k = start; k > sz; k--)
+            for (int k = 52; k > sz; k--)
                 s += " ";
         }
 
@@ -56,37 +56,20 @@ namespace sstc
             if (args.Length == 0)
             {
                 System.Console.WriteLine("Please enter a type of generated report.");
-                System.Console.WriteLine("Usage: sstc -t | -h [-w]");
+                System.Console.WriteLine("Usage: sstc <-t> or <-h>");
                 System.Console.ReadKey();
                 return;
             }
-            int sl = 52, st = 6;
-            string opt = "";
+
             string cmd = args[0];
-            if (args.Length > 1)
-            {
-                opt = args[1];
-            }
             if (cmd != "-t" && cmd != "-h")
             {
-                System.Console.WriteLine("Invalid report type key, supported types keys are text [-t] and html [-h].");
+                System.Console.WriteLine("Invalid report type key, supported types keys are text <-t> and html <-h>.");
                 System.Console.ReadKey();
                 return;
             }
 
-            string LookupDirectory;
-
-            if (opt != "-w")
-            {
-                LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\ntos\\";
-            }
-            else
-            {
-                LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\win32k\\";
-                sl = 75;
-                st = 9;
-            }
-
+            string LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\";
             string[] Tables;
 
             try
@@ -107,9 +90,8 @@ namespace sstc
 
             List<sstTable> DataItems = new List<sstTable>();
             int n = 0, id;
-            string header = "ServiceName";
-            for (int i = 0; i < st; i++)
-                header += "\t";
+            string header = "ServiceName\t";
+            PutSpaces(ref header);
 
             foreach (var sName in Tables)
             {
@@ -163,14 +145,7 @@ namespace sstc
             {
                 if (cmd == "-t")
                 {
-                    if (opt != "-w")
-                    {
-                        file = new StreamWriter("syscalls.txt", false, Encoding.UTF8);
-                    }
-                    else
-                    {
-                        file = new StreamWriter("w32ksyscalls.txt", false, Encoding.UTF8);
-                    }
+                    file = new StreamWriter("output.txt", false, Encoding.UTF8);
                     file.WriteLine(header);
 
                     foreach (var Entry in DataItems)
@@ -178,7 +153,7 @@ namespace sstc
                         count += 1;
                         var s = count.ToString() + ") " + Entry.ServiceName;
 
-                        PutSpaces(ref s, sl);
+                        PutSpaces(ref s);
                         for (int i = 0; i < fcount; i++)
                         {
                             s += "\t";
@@ -230,14 +205,7 @@ namespace sstc
 
                     string item = "";
 
-                    if (opt != "-w")
-                    {
-                        file = new StreamWriter("syscalls.html", false, Encoding.UTF8);
-                    }
-                    else
-                    {
-                        file = new StreamWriter("w32ksyscalls.html", false, Encoding.UTF8);
-                    }
+                    file = new StreamWriter("output.html", false, Encoding.UTF8);
                     file.WriteLine(ReportHead);
                     file.WriteLine(TableHead);
 
