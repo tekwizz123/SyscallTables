@@ -16,7 +16,7 @@
 + Windows 10 RS1 build 14279;
 + Windows 10 RS1 build 14316;
 + Windows 10 RS1 build 14352;
-+ Windows 10 RS1 build 14372.
++ Windows 10 RS1 build 14379.
 
 ** located in Tables\ntos
 
@@ -28,18 +28,22 @@
 + Windows 8.1 build 9600;
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
-+ Windows 10 RS1 build 14372.
++ Windows 10 RS1 build 14379.
 
 ** located in Tables\win32k
 
 # Usage
 
-1) Dump syscall table list (using scg);
-
+1) Dump syscall table list (using scg for ntoskrnl or wscg64 for win32k), see run examples for more info.  
 2) [Tables] <- put syscall list text file named as build number inside directory (ntos subdirectory for ntoskrnl.exe tables, win32k subdirectory for win32k.sys tables);
 
 3) sstc.exe <- run composer with key -t (generate text output file) or -h (generate html output file), it will read files from Tables directory and compose output table. Specify -w as second param if you want to generate win32k combined syscall table.
 
+Run Examples:
+* scg64.exe c:\wfiles\ntdll\ntdll_7600.dll > table7600.txt 
+* wscg64.exe c:\wfiles\win32k\10240\win32k.sys > wtable10240.txt
+* sstc -t -w
+* sstc -h
 
 # Build
 
