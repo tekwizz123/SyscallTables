@@ -382,6 +382,101 @@ BOOL GetWin32kBuildVersion(
     return bResult;
 }
 
+
+/*
+* wscg10
+*
+* Purpose:
+*
+* In case of Windows 10+ we can build table directly from win32k.sys without using symbols.
+*
+*/
+void wscg10(
+    LPWSTR lpszWin32kImage,
+    ULONG Win32kBuild
+)
+{
+    BOOL        bCond = FALSE;
+    ULONG       i, c, k;
+    HMODULE     MappedImageBase = NULL;
+    ULONG_PTR   Address;
+    
+    PCHAR       pfn;
+    DWORD      *Table = NULL;
+    PULONG      ServiceLimit;
+    ULONG_PTR  *ServiceTable;
+
+    PIMAGE_NT_HEADERS     NtHeaders;
+    IMAGE_IMPORT_BY_NAME *ImportEntry = NULL;
+    LPWSTR lpBuffer = NULL;
+    WCHAR szBuffer[MAX_PATH * 4];
+
+    __try {
+        do {
+            MappedImageBase = LoadLibraryExW(lpszWin32kImage, NULL, DONT_RESOLVE_DLL_REFERENCES);
+            if (MappedImageBase == 0) {
+                cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
+                cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            NtHeaders = RtlImageNtHeader((PVOID)MappedImageBase);
+            if (NtHeaders == NULL) {
+                cuiPrintText(g_ConOut, L"wscg: invalid input file.", g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            ServiceLimit = (ULONG*)GetProcAddress(MappedImageBase, "W32pServiceLimit");
+            if (ServiceLimit == NULL) {
+                cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit not found.", g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            c = *ServiceLimit;
+
+            ServiceTable = (ULONG_PTR *)GetProcAddress(MappedImageBase, "W32pServiceTable");
+            if (ServiceTable == NULL) {
+                cuiPrintText(g_ConOut, L"wscg: W32pServiceTable not found.", g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            for (i = 0; i < c; i++) {
+                Address = 0;
+                pfn = NULL;
+                RtlSecureZeroMemory(szBuffer, sizeof(szBuffer));
+                if (Win32kBuild > 10586) {
+                    Table = (DWORD *)ServiceTable;
+                    pfn = (PCHAR)(Table[i] + (ULONG_PTR)MappedImageBase);
+                }
+                else {
+                    pfn = (PCHAR)(ServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + (ULONG_PTR)MappedImageBase);
+                }
+                if (pfn) {
+                    Address = (ULONG_PTR)MappedImageBase + *(ULONG_PTR*)(pfn + 6 + *(DWORD*)(pfn + 2));
+                    ImportEntry = (IMAGE_IMPORT_BY_NAME *)Address;
+                    if (ImportEntry) {
+                        k = (ULONG)_strlen_a(ImportEntry->Name) * sizeof(WCHAR) + sizeof(UNICODE_NULL);
+                        lpBuffer = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, k + 100);
+                        if (lpBuffer) {
+                            MultiByteToWideChar(CP_ACP, 0, (LPCSTR)&ImportEntry->Name, -1, lpBuffer, k / sizeof(WCHAR));
+                            _strcat_w(lpBuffer, L"\t");
+                            ultostr_w(i + W32SYSCALLSTART, _strend_w(lpBuffer));
+                            cuiPrintText(g_ConOut, lpBuffer, g_ConsoleOutput, TRUE);
+                            HeapFree(GetProcessHeap(), 0, lpBuffer);
+                        }
+                    }
+                }
+            }
+
+        } while (bCond);
+
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+}
+
 /*
 * wscg
 *
@@ -397,7 +492,7 @@ void wscg(
     BOOL       bCond = FALSE, bRet = FALSE;
     HANDLE     hSym = GetCurrentProcess();
     DWORD64   *pW32pServiceTable = NULL;
-    DWORD     *Table = NULL;
+//    DWORD     *Table = NULL;
     ULONG     *pW32pServiceLimit = NULL;
     DWORD64    Win32kImage = 0;
     WCHAR      szSymbolName[MAX_PATH];
@@ -406,108 +501,120 @@ void wscg(
 
     IMAGE_NT_HEADERS *NtHeaders;
 
-    if (!InitDbgHelp()) {
-        _strcpy_w(szSymbolName, L"wscg: InitDbgHelp failed, make sure required dlls are in %wscg%\\Symdll folder.");
-        cuiPrintText(g_ConOut, szSymbolName, g_ConsoleOutput, TRUE);
+    if (lpszWin32kImage == NULL)
+        return;
+
+    if (!GetWin32kBuildVersion(lpszWin32kImage, &Win32kBuild)) {
+        cuiPrintText(g_ConOut, L"wscg: Cannot query build information from input file.", g_ConsoleOutput, TRUE);
         return;
     }
 
-    do {
+    if (Win32kBuild > 9600) {
+        wscg10(lpszWin32kImage, Win32kBuild);
+    }
+    else {
+
         SetLastError(0);
 
-        if (lpszWin32kImage == NULL)
-            break;
+        if (!InitDbgHelp()) {
+            _strcpy_w(szSymbolName, L"wscg: InitDbgHelp failed, make sure required dlls are in %wscg%\\Symdll folder.");
+            cuiPrintText(g_ConOut, szSymbolName, g_ConsoleOutput, TRUE);
+            return;
+        }
 
-        pSymSetOptions(SYMOPT_DEFERRED_LOADS | SYMOPT_UNDNAME);
+        do {
 
-        RtlSecureZeroMemory(&g_SymbolsHead, sizeof(g_SymbolsHead));
+            pSymSetOptions(SYMOPT_DEFERRED_LOADS | SYMOPT_UNDNAME);
 
-        RtlSecureZeroMemory(szSymbolName, sizeof(szSymbolName));
-        if (GetModuleFileNameW(NULL, szSymbolName, MAX_PATH) == 0)
-            break;
+            RtlSecureZeroMemory(&g_SymbolsHead, sizeof(g_SymbolsHead));
 
-        _strcpy_w(szFullSymbolInfo, L"SRV*");
-        _filepath_w(szSymbolName, _strend_w(szFullSymbolInfo));
-        _strcat_w(szFullSymbolInfo, L"Symbols");
-        if (!CreateDirectoryW(&szFullSymbolInfo[4], NULL)) {
-            if (GetLastError() != ERROR_ALREADY_EXISTS) {
-                cuiPrintText(g_ConOut, L"wscg: Cannot create symbols directory: ", g_ConsoleOutput, TRUE);
+            RtlSecureZeroMemory(szSymbolName, sizeof(szSymbolName));
+            if (GetModuleFileNameW(NULL, szSymbolName, MAX_PATH) == 0)
+                break;
+
+            _strcpy_w(szFullSymbolInfo, L"SRV*");
+            _filepath_w(szSymbolName, _strend_w(szFullSymbolInfo));
+            _strcat_w(szFullSymbolInfo, L"Symbols");
+            if (!CreateDirectoryW(&szFullSymbolInfo[4], NULL)) {
+                if (GetLastError() != ERROR_ALREADY_EXISTS) {
+                    cuiPrintText(g_ConOut, L"wscg: Cannot create symbols directory: ", g_ConsoleOutput, TRUE);
+                    cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                    break;
+                }
+            }
+            _strcat_w(szFullSymbolInfo, L"*https://msdl.microsoft.com/download/symbols");
+            if (!pSymInitializeW(hSym, szFullSymbolInfo, FALSE)) {
+                cuiPrintText(g_ConOut, L"wscg: SymInitialize failed.", g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            Win32kImage = (DWORD64)(PVOID)LoadLibraryExW(lpszWin32kImage, NULL, DONT_RESOLVE_DLL_REFERENCES);
+            if (Win32kImage == 0) {
+                cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
                 cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
                 break;
             }
-        }
-        _strcat_w(szFullSymbolInfo, L"*https://msdl.microsoft.com/download/symbols");
-        if (!pSymInitializeW(hSym, szFullSymbolInfo, FALSE)) {
-            cuiPrintText(g_ConOut, L"wscg: SymInitialize failed.", g_ConsoleOutput, TRUE);
-            break;
-        }
 
-        Win32kImage = (DWORD64)(PVOID)LoadLibraryExW(lpszWin32kImage, NULL, DONT_RESOLVE_DLL_REFERENCES);
-        if (Win32kImage == 0) {
-            cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
-            cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        if (!GetWin32kBuildVersion(lpszWin32kImage, &Win32kBuild)) {
-            cuiPrintText(g_ConOut, L"wscg: Cannot query build information from input file.", g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        NtHeaders = RtlImageNtHeader((PVOID)Win32kImage);
-        if (!pSymLoadModuleExW(hSym, NULL, lpszWin32kImage, NULL, (DWORD64)Win32kImage, 0, NULL, 0)) {
-            cuiPrintText(g_ConOut, L"wscg: SymLoadModuleEx failed for input file with message: ", g_ConsoleOutput, TRUE);
-            cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        if (!pSymEnumSymbolsW(hSym, (DWORD64)Win32kImage, NULL, SymEnumSymbolsProc, NULL)) {
-            cuiPrintText(g_ConOut, L"wscg: SymEnumSymbols failed.", g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        pW32pServiceLimit = (ULONG *)SymbolAddressFromName(L"W32pServiceLimit");
-        if (pW32pServiceLimit == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit symbol not found.", g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        ServiceLimit = *pW32pServiceLimit;
-
-        pW32pServiceTable = (DWORD64 *)SymbolAddressFromName(L"W32pServiceTable");
-        if (pW32pServiceTable == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: W32pServiceTable symbol not found.", g_ConsoleOutput, TRUE);
-            break;
-        }
-
-        for (i = 0; i < ServiceLimit; i++) {
-            RtlSecureZeroMemory(szSymbolName, sizeof(szSymbolName));
-            if (Win32kBuild > 10586) {
-                Table = (DWORD *)pW32pServiceTable;
-                bRet = SymbolNameFromAddress(Table[i] + Win32kImage, szSymbolName, W32SYSCALLSTART + i);
+            NtHeaders = RtlImageNtHeader((PVOID)Win32kImage);
+            if (!pSymLoadModuleExW(hSym, NULL, lpszWin32kImage, NULL, (DWORD64)Win32kImage, 0, NULL, 0)) {
+                cuiPrintText(g_ConOut, L"wscg: SymLoadModuleEx failed for input file with message: ", g_ConsoleOutput, TRUE);
+                cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                break;
             }
-            else {
-                bRet = SymbolNameFromAddress(pW32pServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + Win32kImage, szSymbolName, W32SYSCALLSTART + i);
-               /* if (!bRet) {
-                    bRet = SymbolNameFromAddress2(pW32pServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + Win32kImage, szSymbolName, W32SYSCALLSTART + i);
-                }*/
+
+            if (!pSymEnumSymbolsW(hSym, (DWORD64)Win32kImage, NULL, SymEnumSymbolsProc, NULL)) {
+                cuiPrintText(g_ConOut, L"wscg: SymEnumSymbols failed.", g_ConsoleOutput, TRUE);
+                break;
             }
-            if (bRet) {
-                RtlSecureZeroMemory(szFullSymbolInfo, sizeof(szFullSymbolInfo));
-                wsprintfW(szFullSymbolInfo, PRINT_FMT, szSymbolName, W32SYSCALLSTART + i);
-                cuiPrintText(g_ConOut, szFullSymbolInfo, g_ConsoleOutput, TRUE);
-                continue;
+
+            pW32pServiceLimit = (ULONG *)SymbolAddressFromName(L"W32pServiceLimit");
+            if (pW32pServiceLimit == NULL) {
+                cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit symbol not found.", g_ConsoleOutput, TRUE);
+                break;
             }
+
+            ServiceLimit = *pW32pServiceLimit;
+
+            pW32pServiceTable = (DWORD64 *)SymbolAddressFromName(L"W32pServiceTable");
+            if (pW32pServiceTable == NULL) {
+                cuiPrintText(g_ConOut, L"wscg: W32pServiceTable symbol not found.", g_ConsoleOutput, TRUE);
+                break;
+            }
+
+            for (i = 0; i < ServiceLimit; i++) {
+                RtlSecureZeroMemory(szSymbolName, sizeof(szSymbolName));
+               // if (Win32kBuild > 10586) {
+               //     Table = (DWORD *)pW32pServiceTable;
+               //     bRet = SymbolNameFromAddress(Table[i] + Win32kImage, szSymbolName, W32SYSCALLSTART + i);
+               // }
+               // else {
+                    bRet = SymbolNameFromAddress(pW32pServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + Win32kImage, szSymbolName, W32SYSCALLSTART + i);
+                //}
+
+                   /* RtlSecureZeroMemory(szFullSymbolInfo, sizeof(szFullSymbolInfo));
+                    if (!bRet) {
+                        _strcpy_w(szSymbolName, L"UnknownSyscall");
+                    }
+                    wsprintfW(szFullSymbolInfo, L"\"%s\",", szSymbolName, W32SYSCALLSTART + i);
+                    cuiPrintText(g_ConOut, szFullSymbolInfo, g_ConsoleOutput, TRUE);*/
+
+                    RtlSecureZeroMemory(szFullSymbolInfo, sizeof(szFullSymbolInfo));
+                    if (!bRet) {
+                        _strcpy_w(szSymbolName, L"UnknownSyscall");                      
+                    }
+                    wsprintfW(szFullSymbolInfo, PRINT_FMT, szSymbolName, W32SYSCALLSTART + i);
+                    cuiPrintText(g_ConOut, szFullSymbolInfo, g_ConsoleOutput, TRUE);
+            }
+
+        } while (bCond);
+
+        if (Win32kImage) {
+            pSymUnloadModule64(hSym, (DWORD64)Win32kImage);
+            FreeLibrary((HMODULE)Win32kImage);
         }
-
-    } while (bCond);
-
-    if (Win32kImage) {
-        pSymUnloadModule64(hSym, (DWORD64)Win32kImage);
-        FreeLibrary((HMODULE)Win32kImage);
+        pSymCleanup(hSym);
+        //list cleanup done at process exit
     }
-    pSymCleanup(hSym);
-    //list cleanup done at process exit
 }
 
 /*

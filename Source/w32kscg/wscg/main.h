@@ -34,6 +34,7 @@
 
 #pragma warning(disable: 28278) // Function name appears with no prototype in scope
 #pragma warning(disable: 4005)  // macro redefinition
+#pragma warning(disable: 4054)  // from function pointer to data pointer
 #pragma warning(disable: 4055)  // from data pointer to function pointer
 #pragma warning(disable: 4091)  // 'typedef ': ignored on left of '' when no variable is declared
 #pragma warning(disable: 4152)  // nonstandard extension, function/data pointer conversion in expression

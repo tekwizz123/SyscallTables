@@ -1,4 +1,4 @@
-﻿ServiceName									6000	7601	9200	9600	10240	10586	14372	
+﻿ServiceName									6000	7601	9200	9600	10240	10586	14379	
 1) NtUserGetThreadState                                                    	4096	4096	4097	4098	4099	4099	4099
 2) NtUserPeekMessage                                                       	4097	4097	4098	4099	4100	4100	4100
 3) NtUserCallOneParam                                                      	4098	4098	4099	4100	4101	4101	4101
@@ -916,133 +916,133 @@
 915) NtGdiDdDDIShareObjects                                                	 	 	4569	4593	4642	4644	4630
 916) NtGdiDdDDIUnpinDirectFlipResources                                    	 	 	4574	4598	4652	4654	4641
 917) NtGdiDdDDIWaitForVerticalBlankEvent2                                  	 	 	4579	4603	4660	4662	4650
-918) NtGdiDwmCreatedBitmapRemotingOutput                                   	 	 	4638	4662	4719	4721	4709
-919) NtGdiSetUMPDSandboxState                                              	 	 	4796	4821	4878	4882	4873
-920) NtNotifyPresentToCompositionSurface                                   	 	 	4814	4839	4897	4901	4892
-921) NtOpenCompositionSurfaceDirtyRegion                                   	 	 	4815	4840	4898	4902	4893
-922) NtOpenCompositionSurfaceSectionInfo                                   	 	 	4816	4841	4899	4903	4894
-923) NtOpenCompositionSurfaceSwapChainHandleInfo                           	 	 	4817	4842	4900	4904	4895
-924) NtQueryCompositionSurfaceBinding                                      	 	 	4818	4845	4906	4910	4901
-925) NtQueryCompositionSurfaceRenderingRealization                         	 	 	4819	4846	4907	4911	4903
-926) NtQueryCompositionSurfaceStatistics                                   	 	 	4820	4847	4908	4912	4904
-927) NtSetCompositionSurfaceOutOfFrameDirectFlipNotification               	 	 	4821	4850	4917	4921	 
-928) NtSetCompositionSurfaceStatistics                                     	 	 	4822	4851	4918	4922	4915
-929) NtTokenManagerGetOutOfFrameDirectFlipSurfaceUpdates                   	 	 	4823	4854	4924	4928	 
-930) NtTokenManagerOpenEvent                                               	 	 	4824	4855	 	 	 
-931) NtTokenManagerThread                                                  	 	 	4825	4857	4926	4930	4921
-932) NtUnBindCompositionSurface                                            	 	 	4826	4858	4927	4931	4922
-933) NtUserAcquireIAMKey                                                   	 	 	4827	4860	4929	4933	4924
-934) NtUserAutoPromoteMouseInPointer                                       	 	 	4830	4863	4932	4936	4928
-935) NtUserAutoRotateScreen                                                	 	 	4831	4864	4933	4937	4929
-936) NtUserCanBrokerForceForeground                                        	 	 	4837	4870	4939	4943	4936
-937) NtUserCheckProcessForClipboardAccess                                  	 	 	4841	4874	4943	4947	4940
-938) NtUserCheckProcessSession                                             	 	 	4842	4875	4944	4948	4941
-939) NtUserCreateDCompositionHwndTarget                                    	 	 	4846	4881	4950	4954	4947
-940) NtUserDeferWindowPosAndBand                                           	 	 	4851	4886	4955	4959	4952
-941) NtUserDelegateCapturePointers                                         	 	 	4852	4887	4956	4960	4953
-942) NtUserDelegateInput                                                   	 	 	4853	4888	4957	4961	4954
-943) NtUserDestroyDCompositionHwndTarget                                   	 	 	4854	4889	4958	4962	4955
-944) NtUserDisableImmersiveOwner                                           	 	 	4856	4891	4960	4964	4957
-945) NtUserDisableProcessWindowFiltering                                   	 	 	4857	4892	4961	4965	4958
-946) NtUserDiscardPointerFrameMessages                                     	 	 	4859	4894	4963	4967	4960
-947) NtUserDwmGetRemoteSessionOcclusionEvent                               	 	 	4870	4905	4974	4978	4971
-948) NtUserDwmGetRemoteSessionOcclusionState                               	 	 	4871	4906	4975	4979	4972
-949) NtUserDwmValidateWindow                                               	 	 	4874	4909	4978	4982	4975
-950) NtUserEnableIAMAccess                                                 	 	 	4875	4910	4980	4984	4977
-951) NtUserEnableMouseInPointer                                            	 	 	4876	4911	4981	4985	4978
-952) NtUserEnableMouseInputForCursorSuppression                            	 	 	4877	4912	4982	4986	4979
-953) NtUserGetAutoRotationState                                            	 	 	4883	4919	4989	4993	4987
-954) NtUserGetCIMSSM                                                       	 	 	4884	4920	4990	4994	4988
-955) NtUserGetClipboardAccessToken                                         	 	 	4887	4923	4993	4997	4991
-956) NtUserGetCurrentInputMessageSource                                    	 	 	4890	4926	4996	5000	4994
-957) NtUserGetDesktopID                                                    	 	 	4892	4929	5000	5004	4998
-958) NtUserGetDisplayAutoRotationPreferences                               	 	 	4893	4930	5001	5005	4999
-959) NtUserGetDisplayAutoRotationPreferencesByProcessId                    	 	 	4894	4931	5002	5006	5000
-960) NtUserGetGlobalIMEStatus                                              	 	 	4899	 	 	 	 
-961) NtUserGetPointerCursorId                                              	 	 	4912	4952	5023	5027	5022
-962) NtUserGetPointerDevice                                                	 	 	4913	4953	5024	5028	5023
-963) NtUserGetPointerDeviceCursors                                         	 	 	4914	4954	5025	5029	5024
-964) NtUserGetPointerDeviceProperties                                      	 	 	4915	4955	5026	5030	5025
-965) NtUserGetPointerDeviceRects                                           	 	 	4916	4956	5027	5031	5026
-966) NtUserGetPointerDevices                                               	 	 	4917	4957	5028	5032	5027
-967) NtUserGetPointerInfoList                                              	 	 	4918	4958	5030	5034	5029
-968) NtUserGetPointerType                                                  	 	 	4919	4960	5032	5036	5031
-969) NtUserGetProcessUIContextInformation                                  	 	 	4921	4964	5036	5040	5035
-970) NtUserGetQueueEventStatus                                             	 	 	4922	4965	5037	5041	 
-971) NtUserGetRawPointerDeviceData                                         	 	 	4927	4970	5042	5046	5041
-972) NtUserGetTouchValidationStatus                                        	 	 	4931	4974	5046	5050	5045
-973) NtUserGetWindowBand                                                   	 	 	4934	4977	5049	5053	5048
-974) NtUserGetWindowFeedbackSetting                                        	 	 	4938	4981	5053	5057	5052
-975) NtUserHandleDelegatedInput                                            	 	 	4942	4985	5057	5061	5056
-976) NtUserHidePointerContactVisualization                                 	 	 	4944	4987	5059	5063	5058
-977) NtUserInitializeTouchInjection                                        	 	 	4953	4996	5070	5074	5070
-978) NtUserInjectTouchInput                                                	 	 	4955	4998	5076	5080	5076
-979) NtUserInternalClipCursor                                              	 	 	4956	4999	5077	5081	5078
-980) NtUserIsMouseInPointerEnabled                                         	 	 	4958	5001	5080	5084	5081
-981) NtUserIsMouseInputEnabled                                             	 	 	4959	5002	5081	5085	5082
-982) NtUserLayoutCompleted                                                 	 	 	4962	5005	5085	5089	5087
-983) NtUserPromoteMouseInPointer                                           	 	 	4981	5027	5108	5112	5110
-984) NtUserPromotePointer                                                  	 	 	4982	5028	5109	5113	5111
-985) NtUserQueryBSDRWindow                                                 	 	 	4983	5029	5110	5114	5112
-986) NtUserRegisterBSDRWindow                                              	 	 	4990	5036	5117	5121	5119
-987) NtUserRegisterEdgy                                                    	 	 	4991	5037	5119	5123	5121
-988) NtUserRegisterPointerDeviceNotifications                              	 	 	4994	5040	5123	5127	5125
-989) NtUserRegisterPointerInputTarget                                      	 	 	4995	5041	5124	5128	5126
-990) NtUserRegisterTouchHitTestingWindow                                   	 	 	5000	5046	5130	5134	5132
-991) NtUserSendEventMessage                                                	 	 	5008	5056	5141	5146	5144
-992) NtUserSetActiveProcess                                                	 	 	5009	5058	 	 	 
-993) NtUserSetAutoRotation                                                 	 	 	5011	5060	5145	5150	5149
-994) NtUserSetBrokeredForeground                                           	 	 	5012	5061	5146	5151	5150
-995) NtUserSetCalibrationData                                              	 	 	5013	5062	5147	5152	5151
-996) NtUserSetDisplayAutoRotationPreferences                               	 	 	5017	5066	5153	5158	5157
-997) NtUserSetDisplayMapping                                               	 	 	5019	5068	5155	5160	5159
-998) NtUserSetFallbackForeground                                           	 	 	5020	5069	5156	5161	5160
-999) NtUserSetImmersiveBackgroundWindow                                    	 	 	5025	5074	5162	 	 
-1000) NtUserSetProcessRestrictionExemption                                 	 	 	5034	5084	5173	5177	5179
-1001) NtUserSetProcessUIAccessZorder                                       	 	 	5035	5085	5174	5178	5180
-1002) NtUserSetSensorPresence                                              	 	 	5036	4097	4098	4098	4098
-1003) NtUserSetThreadInputBlocked                                          	 	 	5041	5090	5179	5183	5185
-1004) NtUserSetWindowBand                                                  	 	 	5043	5092	5182	5186	5188
-1005) NtUserSetWindowCompositionTransition                                 	 	 	5045	5094	5184	5188	5190
-1006) NtUserSetWindowFeedbackSetting                                       	 	 	5047	5096	5186	5190	5192
-1007) NtUserShutdownBlockReasonCreate                                      	 	 	5051	5100	5191	5195	5197
-1008) NtUserShutdownBlockReasonQuery                                       	 	 	5052	5101	5192	5196	5198
-1009) NtUserShutdownReasonDestroy                                          	 	 	5053	5102	5193	5197	5199
-1010) NtUserSignalRedirectionStartComplete                                 	 	 	5054	5103	5194	5198	5200
-1011) NtUserSlicerControl                                                  	 	 	5055	5104	5195	5199	5201
-1012) NtUserUndelegateInput                                                	 	 	5060	5111	5202	5206	5209
-1013) NtUserUpdateDefaultDesktopThumbnail                                  	 	 	5066	5117	5208	5212	5215
-1014) NtUserWaitAvailableMessageEx                                         	 	 	5074	5126	5217	5222	5225
-1015) NtUserWaitForRedirectionStartComplete                                	 	 	5077	5129	5220	5225	5228
-1016) NtValidateCompositionSurfaceHandle                                   	 	 	5079	5131	5222	5227	5230
-1017) NtCompositionInputThread                                             	 	 	 	4385	4386	4386	4385
-1018) NtCreateCompositionInputSink                                         	 	 	 	4386	4387	4388	4387
-1019) NtDCompositionCreateAndBindSharedSection                             	 	 	 	4394	4397	4399	4395
-1020) NtDCompositionCreateConnection                                       	 	 	 	4396	4399	4401	4397
-1021) NtDCompositionDestroyConnection                                      	 	 	 	4401	4404	4406	4401
-1022) NtDCompositionDuplicateHandleToProcess                               	 	 	 	4403	4406	4408	4403
-1023) NtDCompositionGetConnectionBatch                                     	 	 	 	4406	4412	4414	4408
-1024) NtDCompositionOpenSharedResource                                     	 	 	 	4411	4417	4419	 
-1025) NtDCompositionOpenSharedResourceHandle                               	 	 	 	4412	4418	4420	 
-1026) NtDCompositionReferenceSharedResourceOnDwmChannel                    	 	 	 	4413	4419	4421	4414
-1027) NtDCompositionRegisterThumbnailVisual                                	 	 	 	4414	4420	4422	4415
-1028) NtDCompositionSetDebugCounter                                        	 	 	 	4422	4430	4432	4422
-1029) NtDCompositionSetResourceHandleProperty                              	 	 	 	4427	4436	4438	 
-1030) NtDCompositionTelemetryAnimationScenarioBegin                        	 	 	 	4434	4444	4445	4425
-1031) NtDCompositionTelemetryAnimationScenarioReference                    	 	 	 	4435	4445	4446	4426
-1032) NtDCompositionTelemetryAnimationScenarioUnreference                  	 	 	 	4436	4446	4447	4427
-1033) NtDCompositionTelemetrySetApplicationId                              	 	 	 	4437	4447	4448	4428
-1034) NtDuplicateCompositionInputSink                                      	 	 	 	4442	4454	4455	4435
-1035) NtGdiDdDDICacheHybridQueryValue                                      	 	 	 	4501	4516	4517	4498
-1036) NtGdiDdDDICheckMultiPlaneOverlaySupport                              	 	 	 	4504	4520	4521	4502
-1037) NtGdiDdDDIGetCachedHybridQueryValue                                  	 	 	 	4530	4555	4557	4539
-1038) NtGdiDdDDINetDispGetNextChunkInfo                                    	 	 	 	4546	4579	4581	4563
-1039) NtGdiDdDDINetDispQueryMiracastDisplayDeviceStatus                    	 	 	 	4547	4580	4582	4564
-1040) NtGdiDdDDINetDispQueryMiracastDisplayDeviceSupport                   	 	 	 	4548	4581	4583	4565
-1041) NtGdiDdDDINetDispStartMiracastDisplayDevice                          	 	 	 	4549	4582	4584	4566
-1042) NtGdiDdDDINetDispStopMiracastDisplayDevice                           	 	 	 	4550	4584	4585	4567
-1043) NtGdiDdDDIPresentMultiPlaneOverlay                                   	 	 	 	4570	4608	4609	4591
-1044)                                                                      	 	 	 	4642	 	 	 
+918) UnknownSyscall                                                        	 	 	4618	4642	 	 	 
+919) NtGdiDwmCreatedBitmapRemotingOutput                                   	 	 	4638	4662	4719	4721	4709
+920) NtGdiSetUMPDSandboxState                                              	 	 	4796	4821	4878	4882	4873
+921) NtNotifyPresentToCompositionSurface                                   	 	 	4814	4839	4897	4901	4892
+922) NtOpenCompositionSurfaceDirtyRegion                                   	 	 	4815	4840	4898	4902	4893
+923) NtOpenCompositionSurfaceSectionInfo                                   	 	 	4816	4841	4899	4903	4894
+924) NtOpenCompositionSurfaceSwapChainHandleInfo                           	 	 	4817	4842	4900	4904	4895
+925) NtQueryCompositionSurfaceBinding                                      	 	 	4818	4845	4906	4910	4901
+926) NtQueryCompositionSurfaceRenderingRealization                         	 	 	4819	4846	4907	4911	4903
+927) NtQueryCompositionSurfaceStatistics                                   	 	 	4820	4847	4908	4912	4904
+928) NtSetCompositionSurfaceOutOfFrameDirectFlipNotification               	 	 	4821	4850	4917	4921	 
+929) NtSetCompositionSurfaceStatistics                                     	 	 	4822	4851	4918	4922	4915
+930) NtTokenManagerGetOutOfFrameDirectFlipSurfaceUpdates                   	 	 	4823	4854	4924	4928	 
+931) NtTokenManagerOpenEvent                                               	 	 	4824	4855	 	 	 
+932) NtTokenManagerThread                                                  	 	 	4825	4857	4926	4930	4921
+933) NtUnBindCompositionSurface                                            	 	 	4826	4858	4927	4931	4922
+934) NtUserAcquireIAMKey                                                   	 	 	4827	4860	4929	4933	4924
+935) NtUserAutoPromoteMouseInPointer                                       	 	 	4830	4863	4932	4936	4928
+936) NtUserAutoRotateScreen                                                	 	 	4831	4864	4933	4937	4929
+937) NtUserCanBrokerForceForeground                                        	 	 	4837	4870	4939	4943	4936
+938) NtUserCheckProcessForClipboardAccess                                  	 	 	4841	4874	4943	4947	4940
+939) NtUserCheckProcessSession                                             	 	 	4842	4875	4944	4948	4941
+940) NtUserCreateDCompositionHwndTarget                                    	 	 	4846	4881	4950	4954	4947
+941) NtUserDeferWindowPosAndBand                                           	 	 	4851	4886	4955	4959	4952
+942) NtUserDelegateCapturePointers                                         	 	 	4852	4887	4956	4960	4953
+943) NtUserDelegateInput                                                   	 	 	4853	4888	4957	4961	4954
+944) NtUserDestroyDCompositionHwndTarget                                   	 	 	4854	4889	4958	4962	4955
+945) NtUserDisableImmersiveOwner                                           	 	 	4856	4891	4960	4964	4957
+946) NtUserDisableProcessWindowFiltering                                   	 	 	4857	4892	4961	4965	4958
+947) NtUserDiscardPointerFrameMessages                                     	 	 	4859	4894	4963	4967	4960
+948) NtUserDwmGetRemoteSessionOcclusionEvent                               	 	 	4870	4905	4974	4978	4971
+949) NtUserDwmGetRemoteSessionOcclusionState                               	 	 	4871	4906	4975	4979	4972
+950) NtUserDwmValidateWindow                                               	 	 	4874	4909	4978	4982	4975
+951) NtUserEnableIAMAccess                                                 	 	 	4875	4910	4980	4984	4977
+952) NtUserEnableMouseInPointer                                            	 	 	4876	4911	4981	4985	4978
+953) NtUserEnableMouseInputForCursorSuppression                            	 	 	4877	4912	4982	4986	4979
+954) NtUserGetAutoRotationState                                            	 	 	4883	4919	4989	4993	4987
+955) NtUserGetCIMSSM                                                       	 	 	4884	4920	4990	4994	4988
+956) NtUserGetClipboardAccessToken                                         	 	 	4887	4923	4993	4997	4991
+957) NtUserGetCurrentInputMessageSource                                    	 	 	4890	4926	4996	5000	4994
+958) NtUserGetDesktopID                                                    	 	 	4892	4929	5000	5004	4998
+959) NtUserGetDisplayAutoRotationPreferences                               	 	 	4893	4930	5001	5005	4999
+960) NtUserGetDisplayAutoRotationPreferencesByProcessId                    	 	 	4894	4931	5002	5006	5000
+961) NtUserGetGlobalIMEStatus                                              	 	 	4899	 	 	 	 
+962) NtUserGetPointerCursorId                                              	 	 	4912	4952	5023	5027	5022
+963) NtUserGetPointerDevice                                                	 	 	4913	4953	5024	5028	5023
+964) NtUserGetPointerDeviceCursors                                         	 	 	4914	4954	5025	5029	5024
+965) NtUserGetPointerDeviceProperties                                      	 	 	4915	4955	5026	5030	5025
+966) NtUserGetPointerDeviceRects                                           	 	 	4916	4956	5027	5031	5026
+967) NtUserGetPointerDevices                                               	 	 	4917	4957	5028	5032	5027
+968) NtUserGetPointerInfoList                                              	 	 	4918	4958	5030	5034	5029
+969) NtUserGetPointerType                                                  	 	 	4919	4960	5032	5036	5031
+970) NtUserGetProcessUIContextInformation                                  	 	 	4921	4964	5036	5040	5035
+971) NtUserGetQueueEventStatus                                             	 	 	4922	4965	5037	5041	 
+972) NtUserGetRawPointerDeviceData                                         	 	 	4927	4970	5042	5046	5041
+973) NtUserGetTouchValidationStatus                                        	 	 	4931	4974	5046	5050	5045
+974) NtUserGetWindowBand                                                   	 	 	4934	4977	5049	5053	5048
+975) NtUserGetWindowFeedbackSetting                                        	 	 	4938	4981	5053	5057	5052
+976) NtUserHandleDelegatedInput                                            	 	 	4942	4985	5057	5061	5056
+977) NtUserHidePointerContactVisualization                                 	 	 	4944	4987	5059	5063	5058
+978) NtUserInitializeTouchInjection                                        	 	 	4953	4996	5070	5074	5070
+979) NtUserInjectTouchInput                                                	 	 	4955	4998	5076	5080	5076
+980) NtUserInternalClipCursor                                              	 	 	4956	4999	5077	5081	5078
+981) NtUserIsMouseInPointerEnabled                                         	 	 	4958	5001	5080	5084	5081
+982) NtUserIsMouseInputEnabled                                             	 	 	4959	5002	5081	5085	5082
+983) NtUserLayoutCompleted                                                 	 	 	4962	5005	5085	5089	5087
+984) NtUserPromoteMouseInPointer                                           	 	 	4981	5027	5108	5112	5110
+985) NtUserPromotePointer                                                  	 	 	4982	5028	5109	5113	5111
+986) NtUserQueryBSDRWindow                                                 	 	 	4983	5029	5110	5114	5112
+987) NtUserRegisterBSDRWindow                                              	 	 	4990	5036	5117	5121	5119
+988) NtUserRegisterEdgy                                                    	 	 	4991	5037	5119	5123	5121
+989) NtUserRegisterPointerDeviceNotifications                              	 	 	4994	5040	5123	5127	5125
+990) NtUserRegisterPointerInputTarget                                      	 	 	4995	5041	5124	5128	5126
+991) NtUserRegisterTouchHitTestingWindow                                   	 	 	5000	5046	5130	5134	5132
+992) NtUserSendEventMessage                                                	 	 	5008	5056	5141	5146	5144
+993) NtUserSetActiveProcess                                                	 	 	5009	5058	 	 	 
+994) NtUserSetAutoRotation                                                 	 	 	5011	5060	5145	5150	5149
+995) NtUserSetBrokeredForeground                                           	 	 	5012	5061	5146	5151	5150
+996) NtUserSetCalibrationData                                              	 	 	5013	5062	5147	5152	5151
+997) NtUserSetDisplayAutoRotationPreferences                               	 	 	5017	5066	5153	5158	5157
+998) NtUserSetDisplayMapping                                               	 	 	5019	5068	5155	5160	5159
+999) NtUserSetFallbackForeground                                           	 	 	5020	5069	5156	5161	5160
+1000) NtUserSetImmersiveBackgroundWindow                                   	 	 	5025	5074	5162	 	 
+1001) NtUserSetProcessRestrictionExemption                                 	 	 	5034	5084	5173	5177	5179
+1002) NtUserSetProcessUIAccessZorder                                       	 	 	5035	5085	5174	5178	5180
+1003) NtUserSetSensorPresence                                              	 	 	5036	4097	4098	4098	4098
+1004) NtUserSetThreadInputBlocked                                          	 	 	5041	5090	5179	5183	5185
+1005) NtUserSetWindowBand                                                  	 	 	5043	5092	5182	5186	5188
+1006) NtUserSetWindowCompositionTransition                                 	 	 	5045	5094	5184	5188	5190
+1007) NtUserSetWindowFeedbackSetting                                       	 	 	5047	5096	5186	5190	5192
+1008) NtUserShutdownBlockReasonCreate                                      	 	 	5051	5100	5191	5195	5197
+1009) NtUserShutdownBlockReasonQuery                                       	 	 	5052	5101	5192	5196	5198
+1010) NtUserShutdownReasonDestroy                                          	 	 	5053	5102	5193	5197	5199
+1011) NtUserSignalRedirectionStartComplete                                 	 	 	5054	5103	5194	5198	5200
+1012) NtUserSlicerControl                                                  	 	 	5055	5104	5195	5199	5201
+1013) NtUserUndelegateInput                                                	 	 	5060	5111	5202	5206	5209
+1014) NtUserUpdateDefaultDesktopThumbnail                                  	 	 	5066	5117	5208	5212	5215
+1015) NtUserWaitAvailableMessageEx                                         	 	 	5074	5126	5217	5222	5225
+1016) NtUserWaitForRedirectionStartComplete                                	 	 	5077	5129	5220	5225	5228
+1017) NtValidateCompositionSurfaceHandle                                   	 	 	5079	5131	5222	5227	5230
+1018) NtCompositionInputThread                                             	 	 	 	4385	4386	4386	4385
+1019) NtCreateCompositionInputSink                                         	 	 	 	4386	4387	4388	4387
+1020) NtDCompositionCreateAndBindSharedSection                             	 	 	 	4394	4397	4399	4395
+1021) NtDCompositionCreateConnection                                       	 	 	 	4396	4399	4401	4397
+1022) NtDCompositionDestroyConnection                                      	 	 	 	4401	4404	4406	4401
+1023) NtDCompositionDuplicateHandleToProcess                               	 	 	 	4403	4406	4408	4403
+1024) NtDCompositionGetConnectionBatch                                     	 	 	 	4406	4412	4414	4408
+1025) NtDCompositionOpenSharedResource                                     	 	 	 	4411	4417	4419	 
+1026) NtDCompositionOpenSharedResourceHandle                               	 	 	 	4412	4418	4420	 
+1027) NtDCompositionReferenceSharedResourceOnDwmChannel                    	 	 	 	4413	4419	4421	4414
+1028) NtDCompositionRegisterThumbnailVisual                                	 	 	 	4414	4420	4422	4415
+1029) NtDCompositionSetDebugCounter                                        	 	 	 	4422	4430	4432	4422
+1030) NtDCompositionSetResourceHandleProperty                              	 	 	 	4427	4436	4438	 
+1031) NtDCompositionTelemetryAnimationScenarioBegin                        	 	 	 	4434	4444	4445	4425
+1032) NtDCompositionTelemetryAnimationScenarioReference                    	 	 	 	4435	4445	4446	4426
+1033) NtDCompositionTelemetryAnimationScenarioUnreference                  	 	 	 	4436	4446	4447	4427
+1034) NtDCompositionTelemetrySetApplicationId                              	 	 	 	4437	4447	4448	4428
+1035) NtDuplicateCompositionInputSink                                      	 	 	 	4442	4454	4455	4435
+1036) NtGdiDdDDICacheHybridQueryValue                                      	 	 	 	4501	4516	4517	4498
+1037) NtGdiDdDDICheckMultiPlaneOverlaySupport                              	 	 	 	4504	4520	4521	4502
+1038) NtGdiDdDDIGetCachedHybridQueryValue                                  	 	 	 	4530	4555	4557	4539
+1039) NtGdiDdDDINetDispGetNextChunkInfo                                    	 	 	 	4546	4579	4581	4563
+1040) NtGdiDdDDINetDispQueryMiracastDisplayDeviceStatus                    	 	 	 	4547	4580	4582	4564
+1041) NtGdiDdDDINetDispQueryMiracastDisplayDeviceSupport                   	 	 	 	4548	4581	4583	4565
+1042) NtGdiDdDDINetDispStartMiracastDisplayDevice                          	 	 	 	4549	4582	4584	4566
+1043) NtGdiDdDDINetDispStopMiracastDisplayDevice                           	 	 	 	4550	4584	4585	4567
+1044) NtGdiDdDDIPresentMultiPlaneOverlay                                   	 	 	 	4570	4608	4609	4591
 1045) NtGdiGetCurrentDpiInfo                                               	 	 	 	4724	4781	4785	4773
 1046) NtQueryCompositionInputSink                                          	 	 	 	4843	4903	4907	4898
 1047) NtQueryCompositionInputSinkLuid                                      	 	 	 	4844	4904	4908	4899
