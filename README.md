@@ -14,7 +14,8 @@
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
 + Windows 10 RS1 build 14393;
-+ Windows 10 RS2 build 14905.
++ Windows 10 RS2 build 14905;
++ Windows 10 RS2 build 14915.
 
 ** located in Tables\ntos
 
@@ -27,7 +28,9 @@
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
 + Windows 10 RS1 build 14393;
-+ Windows 10 RS2 build 14905.
++ Windows 10 RS2 build 14905;
++ Windows 10 RS2 build 14915.
+
 
 ** located in Tables\win32k
 
