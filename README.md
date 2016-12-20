@@ -19,7 +19,8 @@
 + Windows 10 RS2 build 14926;
 + Windows 10 RS2 build 14931;
 + Windows 10 RS2 build 14955;
-+ Windows 10 RS2 build 14971.
++ Windows 10 RS2 build 14971;
++ Windows 10 RS2 build 14986.
 
 ** located in Tables\ntos
 
@@ -37,7 +38,8 @@
 + Windows 10 RS2 build 14926;
 + Windows 10 RS2 build 14931;
 + Windows 10 RS2 build 14955;
-+ Windows 10 RS2 build 14971.
++ Windows 10 RS2 build 14971;
++ Windows 10 RS2 build 14986.
 
 ** located in Tables\win32k
 
