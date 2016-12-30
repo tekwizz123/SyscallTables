@@ -20,7 +20,8 @@
 + Windows 10 RS2 build 14931;
 + Windows 10 RS2 build 14955;
 + Windows 10 RS2 build 14971;
-+ Windows 10 RS2 build 14986.
++ Windows 10 RS2 build 14986;
++ Windows 10 RS2 build 14997.
 
 ** located in Tables\ntos
 
@@ -39,7 +40,8 @@
 + Windows 10 RS2 build 14931;
 + Windows 10 RS2 build 14955;
 + Windows 10 RS2 build 14971;
-+ Windows 10 RS2 build 14986.
++ Windows 10 RS2 build 14986;
++ Windows 10 RS2 build 14997.
 
 ** located in Tables\win32k
 
@@ -62,6 +64,6 @@ Composer source code written in C#. In order to build from source you need Micro
 
 # Authors
 
-+ sstComposer (c) 2016 SyscallTables Project
++ sstComposer (c) 2016 - 2017 SyscallTables Project
 + wscg64 (c) 2016 SyscallTables Project, portions (c) 2010 deroko of ARTeam
 + scg (c) 2011 gr8
