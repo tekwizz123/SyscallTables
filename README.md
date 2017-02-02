@@ -14,16 +14,7 @@
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
 + Windows 10 RS1 build 14393;
-+ Windows 10 RS2 build 14905;
-+ Windows 10 RS2 build 14915;
-+ Windows 10 RS2 build 14926;
-+ Windows 10 RS2 build 14931;
-+ Windows 10 RS2 build 14955;
-+ Windows 10 RS2 build 14971;
-+ Windows 10 RS2 build 14986;
-+ Windows 10 RS2 build 14997;
-+ Windows 10 RS2 build 15002;
-+ Windows 10 RS2 build 15019.
++ Windows 10 RS2 build 15025.
 
 ** located in Tables\ntos
 
@@ -36,16 +27,7 @@
 + Windows 10 TH1 build 10240;
 + Windows 10 TH2 build 10586;
 + Windows 10 RS1 build 14393;
-+ Windows 10 RS2 build 14905;
-+ Windows 10 RS2 build 14915;
-+ Windows 10 RS2 build 14926;
-+ Windows 10 RS2 build 14931;
-+ Windows 10 RS2 build 14955;
-+ Windows 10 RS2 build 14971;
-+ Windows 10 RS2 build 14986;
-+ Windows 10 RS2 build 14997;
-+ Windows 10 RS2 build 15002;
-+ Windows 10 RS2 build 15019.
++ Windows 10 RS2 build 15025.
 
 ** located in Tables\win32k
 
