@@ -60,7 +60,7 @@ namespace sstc
                 System.Console.ReadKey();
                 return;
             }
-            int sl = 52, st = 6;
+            int sl = 52, st = 7, sk;
             string opt = "";
             string cmd = args[0];
             if (args.Length > 1)
@@ -79,12 +79,13 @@ namespace sstc
             if (opt != "-w")
             {
                 LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\ntos\\";
+                sk = 6;
             }
             else
             {
                 LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\win32k\\";
                 sl = 75;
-                st = 9;
+                sk = 0;
             }
 
             string[] Tables;
@@ -111,6 +112,8 @@ namespace sstc
             for (int i = 0; i < st; i++)
                 header += "\t";
 
+            int max = 0;
+
             foreach (var sName in Tables)
             {
                 string[] fData;
@@ -129,6 +132,8 @@ namespace sstc
 
                         syscall_id = Convert.ToInt32(fData[i].Substring(u));
                         syscall_name = fData[i].Substring(0, u - 1);
+
+                        if (syscall_name.Length > max) max = syscall_name.Length;
 
                         id = IndexOfItem(syscall_name, DataItems);
                         if (id != -1)
@@ -157,6 +162,8 @@ namespace sstc
                 header += "\t";
             }
 
+            sl = max + sk;
+
             StreamWriter file;
 
             try
@@ -176,7 +183,8 @@ namespace sstc
                     foreach (var Entry in DataItems)
                     {
                         count += 1;
-                        var s = count.ToString() + ") " + Entry.ServiceName;
+
+                        var s = count.ToString("0000") + ") " + Entry.ServiceName;
 
                         PutSpaces(ref s, sl);
                         for (int i = 0; i < fcount; i++)
