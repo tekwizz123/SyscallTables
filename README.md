@@ -16,7 +16,8 @@
 + Windows 10 RS1 build 14393;
 + Windows 10 RS2 build 15063;
 + Windows 10 RS3 build 16299;
-+ Windows 10 RS4 build 17004.
++ Windows 10 RS4 build 17004;
++ Windows 10 RS4 build 17025.
 
 ** located in Tables\ntos
 
@@ -31,7 +32,8 @@
 + Windows 10 RS1 build 14393;
 + Windows 10 RS2 build 15063;
 + Windows 10 RS3 build 16299;
-+ Windows 10 RS4 build 17004.
++ Windows 10 RS4 build 17004;
++ Windows 10 RS4 build 17025.
 
 ** located in Tables\win32k
 
