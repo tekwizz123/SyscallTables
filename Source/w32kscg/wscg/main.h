@@ -1,12 +1,12 @@
 /*******************************************************************************
 *
-*  (C) COPYRIGHT AUTHORS, 2016
+*  (C) COPYRIGHT AUTHORS, 2016 - 2018
 *
 *  TITLE:       MAIN.H
 *
-*  VERSION:     1.00
+*  VERSION:     1.12
 *
-*  DATE:        01 June 2016
+*  DATE:        10 Jan 2018
 *
 *  Common header file.
 *
@@ -32,25 +32,16 @@
 #endif
 #endif
 
-#pragma warning(disable: 28278) // Function name appears with no prototype in scope
-#pragma warning(disable: 4005)  // macro redefinition
 #pragma warning(disable: 4054)  // from function pointer to data pointer
-#pragma warning(disable: 4055)  // from data pointer to function pointer
 #pragma warning(disable: 4091)  // 'typedef ': ignored on left of '' when no variable is declared
-#pragma warning(disable: 4152)  // nonstandard extension, function/data pointer conversion in expression
-#pragma warning(disable: 4201)  // nonstandard extension used : nameless struct/union
-#pragma warning(disable: 6102)  // Using %s from failed function call at line %u
-#pragma warning(disable: 6320)  // exception-filter expression is the constant EXCEPTION_EXECUTE_HANDLER
+#pragma warning(disable: 6320)  // exception-filter expression is the constant EXCEPTION_EXECUTE_HANDLER  
 
 #include <windows.h>
-#include <ntstatus.h>
 #include <DbgHelp.h>
 #include "minirtl\minirtl.h"
 #include "minirtl\_filename.h"
-#include "ntos.h"
 #include "cui.h"
 
-#pragma comment(lib, "dbghelp.lib")
 #pragma comment(lib, "Version.lib")
 
 #define W32SYSCALLSTART 0x1000
@@ -58,6 +49,7 @@
 typedef struct _SYMBOL_ENTRY {
     struct _SYMBOL_ENTRY *Next;
     LPWSTR   Name;
+    SIZE_T   NameLen;
     DWORD64  Address;
 } SYMBOL_ENTRY, *PSYMBOL_ENTRY;
 

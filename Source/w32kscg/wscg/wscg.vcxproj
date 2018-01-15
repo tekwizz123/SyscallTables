@@ -174,7 +174,6 @@
   <ItemGroup>
     <ClCompile Include="cui.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="minirtl\ultohex.c" />
     <ClCompile Include="minirtl\ultostr.c" />
     <ClCompile Include="minirtl\_filename.c" />
     <ClCompile Include="minirtl\_strcat.c" />
@@ -191,7 +190,6 @@
     <ClInclude Include="minirtl\minirtl.h" />
     <ClInclude Include="minirtl\rtltypes.h" />
     <ClInclude Include="minirtl\_filename.h" />
-    <ClInclude Include="ntos.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

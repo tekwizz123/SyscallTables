@@ -1,12 +1,12 @@
 /*******************************************************************************
 *
-*  (C) COPYRIGHT AUTHORS, 2016
+*  (C) COPYRIGHT AUTHORS, 2016 - 2018
 *
 *  TITLE:       CUI.H
 *
-*  VERSION:     1.00
+*  VERSION:     1.12
 *
-*  DATE:        12 June 2016
+*  DATE:        10 Jan 2018
 *
 *  Common header file for console ui.
 *

@@ -48,9 +48,6 @@
     <ClCompile Include="minirtl\_filename.c">
       <Filter>minirtl</Filter>
     </ClCompile>
-    <ClCompile Include="minirtl\ultohex.c">
-      <Filter>minirtl</Filter>
-    </ClCompile>
     <ClCompile Include="cui.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,9 +58,6 @@
     </ClInclude>
     <ClInclude Include="minirtl\rtltypes.h">
       <Filter>minirtl</Filter>
-    </ClInclude>
-    <ClInclude Include="ntos.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minirtl\_filename.h">
       <Filter>minirtl</Filter>
