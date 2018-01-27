@@ -83,6 +83,8 @@ int main(
     LPWSTR *szArglist;
     INT nArgs = 0;
 
+    __security_init_cookie();
+
     szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
     if (szArglist) {
         if (nArgs > 1) {
