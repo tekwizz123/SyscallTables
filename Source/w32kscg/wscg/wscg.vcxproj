@@ -173,6 +173,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cui.c" />
+    <ClCompile Include="hde\hde64.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="minirtl\ultostr.c" />
     <ClCompile Include="minirtl\_filename.c" />
@@ -186,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cui.h" />
+    <ClInclude Include="hde\hde64.h" />
+    <ClInclude Include="hde\pstdint.h" />
+    <ClInclude Include="hde\table64.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="minirtl\minirtl.h" />
     <ClInclude Include="minirtl\rtltypes.h" />

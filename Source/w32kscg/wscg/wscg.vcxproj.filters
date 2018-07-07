@@ -16,6 +16,9 @@
     <Filter Include="minirtl">
       <UniqueIdentifier>{81ca1a7b-8bd1-4a2b-a0a3-d87ea8f3f5a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hde">
+      <UniqueIdentifier>{2d2e207d-9f8a-4501-9d9e-af697e5cc014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -51,6 +54,9 @@
     <ClCompile Include="cui.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hde\hde64.c">
+      <Filter>hde</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="minirtl\minirtl.h">
@@ -70,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hde\hde64.h">
+      <Filter>hde</Filter>
+    </ClInclude>
+    <ClInclude Include="hde\pstdint.h">
+      <Filter>hde</Filter>
+    </ClInclude>
+    <ClInclude Include="hde\table64.h">
+      <Filter>hde</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

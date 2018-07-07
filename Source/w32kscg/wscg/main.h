@@ -41,6 +41,7 @@
 #include "minirtl\minirtl.h"
 #include "minirtl\_filename.h"
 #include "cui.h"
+#include "hde\hde64.h"
 
 #pragma comment(lib, "Version.lib")
 

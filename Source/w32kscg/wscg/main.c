@@ -4,9 +4,9 @@
 *
 *  TITLE:       MAIN.C
 *
-*  VERSION:     1.12
+*  VERSION:     1.13
 *
-*  DATE:        10 Jan 2018
+*  DATE:        04 July 2018
 *
 * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 * ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -560,6 +560,7 @@ void wscg10(
     _In_ ULONG Win32kBuild
 )
 {
+    BOOL        bCond = FALSE;
     ULONG       i, c;
     PVOID       pvImageBase = NULL;
     ULONG_PTR   Address;
@@ -577,25 +578,27 @@ void wscg10(
     IMAGE_IMPORT_BY_NAME *ImportEntry = NULL;
     LPWSTR lpBuffer = NULL;
 
-    __try {
+    hde64s hs;
+
+    do {
 
         pvImageBase = LdrMapInputFile(lpszWin32kImage);
         if (pvImageBase == NULL) {
             cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
             cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
-            __leave;
+            break;
         }
 
         NtHeaders = LdrImageNtHeader(pvImageBase);
         if (NtHeaders == NULL) {
             cuiPrintText(g_ConOut, L"wscg: invalid input file.", g_ConsoleOutput, TRUE);
-            __leave;
+            break;
         }
 
         ServiceLimit = (ULONG*)LdrGetProcAddress(pvImageBase, "W32pServiceLimit");
         if (ServiceLimit == NULL) {
             cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit not found.", g_ConsoleOutput, TRUE);
-            __leave;
+            break;
         }
 
         c = *ServiceLimit;
@@ -603,47 +606,64 @@ void wscg10(
         ServiceTable = (ULONG_PTR *)LdrGetProcAddress(pvImageBase, "W32pServiceTable");
         if (ServiceTable == NULL) {
             cuiPrintText(g_ConOut, L"wscg: W32pServiceTable not found.", g_ConsoleOutput, TRUE);
-            __leave;
+            break;
         }
 
-        for (i = 0; i < c; i++) {
-            Address = 0;
-            pfn = NULL;
-            if (Win32kBuild > 10586) {
-                Table = (DWORD *)ServiceTable; //-V114
-                pfn = (PCHAR)(Table[i] + (ULONG_PTR)pvImageBase);
-            }
-            else {
-                pfn = (PCHAR)(ServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + (ULONG_PTR)pvImageBase);
-            }
-            if (pfn) {
-                Address = (ULONG_PTR)pvImageBase + *(ULONG_PTR*)(pfn + 6 + *(DWORD*)(pfn + 2));
-                ImportEntry = (IMAGE_IMPORT_BY_NAME *)Address;
-                if (ImportEntry) {
-                    Length = 1 + _strlen_a(ImportEntry->Name);
-                    lpBuffer = HeapAlloc(ProcessHeap, HEAP_ZERO_MEMORY, (Length * sizeof(WCHAR)) + 100);
-                    if (lpBuffer) {
+        __try {
 
-                        MultiByteToWideChar(CP_ACP,
-                            0,
-                            (LPCSTR)&ImportEntry->Name,
-                            -1,
-                            lpBuffer,
-                            (INT)Length);
+            for (i = 0; i < c; i++) {
+                Address = 0;
+                pfn = NULL;
+                if (Win32kBuild > 10586) {
+                    Table = (DWORD *)ServiceTable; //-V114
+                    pfn = (PCHAR)(Table[i] + (ULONG_PTR)pvImageBase);
+                }
+                else {
+                    pfn = (PCHAR)(ServiceTable[i] - NtHeaders->OptionalHeader.ImageBase + (ULONG_PTR)pvImageBase);
+                }
+                if (pfn) {
 
-                        _strcat_w(lpBuffer, L"\t");
-                        ultostr_w(i + W32SYSCALLSTART, _strend_w(lpBuffer));
-                        cuiPrintText(g_ConOut, lpBuffer, g_ConsoleOutput, TRUE);
-                        HeapFree(ProcessHeap, 0, lpBuffer);
+                    hde64_disasm((void*)pfn, &hs);
+                    if (hs.flags & F_ERROR) {
+#ifdef _DEBUG
+                        OutputDebugString(L"HDE error");
+#endif
+                        break;
+                    }
+                    Address = (ULONG_PTR)pvImageBase + *(ULONG_PTR*)(pfn + hs.len + *(DWORD*)(pfn + (hs.len - 4)));
+                    ImportEntry = (IMAGE_IMPORT_BY_NAME *)Address;
+                    if (ImportEntry) {
+                        Length = 1 + _strlen_a(ImportEntry->Name);
+                        lpBuffer = HeapAlloc(ProcessHeap, HEAP_ZERO_MEMORY, (Length * sizeof(WCHAR)) + 100);
+                        if (lpBuffer) {
+
+                            MultiByteToWideChar(CP_ACP,
+                                0,
+                                (LPCSTR)&ImportEntry->Name,
+                                -1,
+                                lpBuffer,
+                                (INT)Length);
+
+                            _strcat_w(lpBuffer, L"\t");
+                            ultostr_w(i + W32SYSCALLSTART, _strend_w(lpBuffer));
+                            cuiPrintText(g_ConOut, lpBuffer, g_ConsoleOutput, TRUE);
+                            HeapFree(ProcessHeap, 0, lpBuffer);
+                        }
                     }
                 }
             }
+
         }
-    }
-    __finally {
-        if (pvImageBase != NULL)
-            UnmapViewOfFile(pvImageBase);
-    }
+        __except (EXCEPTION_EXECUTE_HANDLER) {
+#ifdef _DEBUG
+            OutputDebugString(L"wscg: exception during parsing win32k.sys");
+#endif
+        }
+
+    } while (bCond); 
+    
+    if (pvImageBase != NULL)
+        UnmapViewOfFile(pvImageBase);
 }
 
 /*
