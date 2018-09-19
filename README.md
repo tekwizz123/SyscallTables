@@ -18,8 +18,9 @@
 + Windows 10 RS3 build 16299;
 + Windows 10 RS4 build 17134;
 + Windows 10 RS5 build 17741;
-+ Windows 10 19H1 build 18219.
-
++ Windows 10 RS5 build 17763;
++ Windows 10 19H1 build 18219;
++ Windows 10 19H1 build 18242.
 
 ** located in Tables\ntos
 
@@ -36,7 +37,9 @@
 + Windows 10 RS3 build 16299;
 + Windows 10 RS4 build 17134;
 + Windows 10 RS5 build 17741;
-+ Windows 10 19H1 build 18219.
++ Windows 10 RS5 build 17763;
++ Windows 10 19H1 build 18219;
++ Windows 10 19H1 build 18242.
 
 ** located in Tables\win32k
 
