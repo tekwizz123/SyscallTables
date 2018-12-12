@@ -22,7 +22,8 @@
 + Windows 10 19H1 build 18267;
 + Windows 10 19H1 build 18272;
 + Windows 10 19H1 build 18282;
-+ Windows 10 19H1 build 18290.
++ Windows 10 19H1 build 18290;
++ Windows 10 19H1 build 18298.
 
 ** located in Tables\ntos
 
@@ -43,7 +44,8 @@
 + Windows 10 19H1 build 18267;
 + Windows 10 19H1 build 18272;
 + Windows 10 19H1 build 18282;
-+ Windows 10 19H1 build 18290.
++ Windows 10 19H1 build 18290;
++ Windows 10 19H1 build 18298.
 
 ** located in Tables\win32k
 
