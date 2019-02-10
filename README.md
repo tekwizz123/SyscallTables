@@ -54,12 +54,12 @@ Run Examples:
 
 # Build
 
-Composer source code written in C#. In order to build from source you need Microsoft Visual Studio version 2013 and higher and .NET Framework version 4.5 and higher. Both scg and wscg source code written in C. In order to build from source you need Microsoft Visual Studio version 2013/2015 and higher.
+Composer source code written in C#. In order to build from source you need Microsoft Visual Studio version 2017 and higher and .NET Framework version 4.5 and higher. Both scg and wscg source code written in C. In order to build from source you need Microsoft Visual Studio version 2017 with SDK 17763 installed and higher.
 
 # Authors
 
-+ scg (c) 2018 SyscallTables Project
-+ sstComposer (c) 2016 - 2018 SyscallTables Project
-+ wscg64 (c) 2016 - 2018 SyscallTables Project, portions (c) 2010 deroko of ARTeam
++ scg (c) 2018 - 2019 SyscallTables Project
++ sstComposer (c) 2016 - 2019 SyscallTables Project
++ wscg64 (c) 2016 - 2019 SyscallTables Project, portions (c) 2010 deroko of ARTeam
 
 Original scg (c) 2011 gr8

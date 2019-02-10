@@ -60,7 +60,7 @@ namespace sstc
                 System.Console.ReadKey();
                 return;
             }
-            int sl = 52, st = 7, sk;
+            int st = 7, sk;
             string opt = "";
             string cmd = args[0];
             if (args.Length > 1)
@@ -84,7 +84,6 @@ namespace sstc
             else
             {
                 LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\win32k\\";
-                sl = 75;
                 sk = 0;
             }
 
@@ -162,7 +161,7 @@ namespace sstc
                 header += "\t";
             }
 
-            sl = max + sk;
+            int sl = max + sk;
 
             StreamWriter file;
 

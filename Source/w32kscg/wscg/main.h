@@ -1,12 +1,12 @@
 /*******************************************************************************
 *
-*  (C) COPYRIGHT AUTHORS, 2016 - 2018
+*  (C) COPYRIGHT AUTHORS, 2016 - 2019
 *
 *  TITLE:       MAIN.H
 *
-*  VERSION:     1.12
+*  VERSION:     1.14
 *
-*  DATE:        10 Jan 2018
+*  DATE:        20 Jan 2019
 *
 *  Common header file.
 *
@@ -23,12 +23,15 @@
 #error ANSI build is not supported
 #endif
 
-#if (_MSC_VER >= 1900) 
+#if defined (_MSC_VER)
+#if (_MSC_VER >= 1900)
 #ifdef _DEBUG
 #pragma comment(lib, "vcruntimed.lib")
 #pragma comment(lib, "ucrtd.lib")
 #else
+#pragma comment(lib, "libucrt.lib")
 #pragma comment(lib, "libvcruntime.lib")
+#endif
 #endif
 #endif
 

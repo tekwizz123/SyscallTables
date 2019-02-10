@@ -1,12 +1,12 @@
 /*******************************************************************************
 *
-*  (C) COPYRIGHT AUTHORS, 2016 - 2018
+*  (C) COPYRIGHT AUTHORS, 2016 - 2019
 *
 *  TITLE:       MAIN.C
 *
-*  VERSION:     1.13
+*  VERSION:     1.14
 *
-*  DATE:        04 July 2018
+*  DATE:        20 Jan 2019
 *
 * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 * ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -657,6 +657,8 @@ void wscg10(
         __except (EXCEPTION_EXECUTE_HANDLER) {
 #ifdef _DEBUG
             OutputDebugString(L"wscg: exception during parsing win32k.sys");
+#else
+			;
 #endif
         }
 

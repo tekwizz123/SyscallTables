@@ -68,9 +68,6 @@
     <ClInclude Include="minirtl\_filename.h">
       <Filter>minirtl</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="cui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="hde\table64.h">
       <Filter>hde</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
