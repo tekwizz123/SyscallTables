@@ -1,4 +1,4 @@
-﻿ServiceName							6000	7601	9200	9600	10240	10586	14393	15063	16299	17134	17763	18329	18334	18836	
+﻿ServiceName							6000	7601	9200	9600	10240	10586	14393	15063	16299	17134	17763	18356	18850	18855	
 0001) NtUserGetThreadState                                 	4096	4096	4097	4098	4099	4099	4099	4099	4099	4099	4099	4099	4099	4099
 0002) NtUserPeekMessage                                    	4097	4097	4098	4099	4100	4100	4100	4100	4100	4100	4100	4100	4100	4100
 0003) NtUserCallOneParam                                   	4098	4098	4099	4100	4101	4101	4101	4101	4101	4101	4101	4101	4101	4101
@@ -742,37 +742,37 @@
 0741) NtUserSetMirrorRendering                             	4836	4878	5031	5080	5169	5173	5174	5171	5208	5256	5273	5288	5288	5288
 0742) NtUserSetObjectInformation                           	4837	4879	5032	5081	5170	5174	5175	5172	5209	5258	5274	5289	5289	5289
 0743) NtUserSetProcessDPIAware                             	4838	4880	5033	 	 	 	 	 	 	 	 	 	 	 
-0744) NtUserSetShellWindowEx                               	4839	4881	5037	5086	5175	5179	5181	5178	5215	5264	5280	5295	5296	5296
-0745) NtUserSetSysColors                                   	4840	4882	5038	5087	5176	5180	5182	5179	5216	5265	5281	5296	5297	5297
-0746) NtUserSetSystemCursor                                	4841	4883	5039	5088	5177	5181	5183	5180	5217	5266	5282	5297	5298	5298
-0747) NtUserSetSystemTimer                                 	4842	4884	5040	5089	5178	5182	5184	5181	5218	5267	5283	5298	5299	5299
-0748) NtUserSetThreadLayoutHandles                         	4843	4885	5042	5091	5180	5184	5186	5183	5221	5270	5286	5301	5302	5302
-0749) NtUserSetWindowRgnEx                                 	4844	4888	5048	5097	5187	5191	5193	5190	5228	5278	5294	5309	5310	5310
-0750) NtUserSetWindowStationUser                           	4845	4889	5049	5098	5189	5193	5195	5192	5230	5280	5296	5311	5312	5312
-0751) NtUserShowSystemCursor                               	4846	4900	5050	5099	5190	5194	5196	5193	5232	5282	5298	5313	5314	5314
-0752) NtUserSoundSentry                                    	4847	4901	5056	5105	5196	5200	5202	5199	5238	5288	5304	5319	5320	5320
-0753) NtUserSwitchDesktop                                  	4848	4902	5057	5106	5197	5201	5203	5200	5240	5290	5306	5321	5322	5322
-0754) NtUserTestForInteractiveUser                         	4849	4903	5058	5107	5198	5202	5205	5202	5242	5292	5308	5323	5324	5324
-0755) NtUserTrackPopupMenuEx                               	4850	4904	5059	5108	5199	5203	5206	5203	5243	5293	5309	5324	5325	5325
-0756) NtUserUnloadKeyboardLayout                           	4851	4905	5061	5112	5203	5207	5210	5207	5247	5297	5313	5328	5329	5329
-0757) NtUserUnlockWindowStation                            	4852	4906	5062	5113	5204	5208	5211	5208	5248	5298	5314	5329	5330	5330
-0758) NtUserUnregisterHotKey                               	4853	4907	5063	5114	5205	5209	5212	5209	5249	5299	5315	5330	5331	5331
-0759) NtUserUnregisterSessionPort                          	4854	4908	5064	5115	5206	5210	5213	5210	5250	5300	5316	5331	5332	5332
-0760) NtUserUnregisterUserApiHook                          	4855	4909	5065	5116	5207	5211	5214	5211	5251	5301	5317	5332	5333	5333
-0761) NtUserUpdateInputContext                             	4856	4910	5067	5118	5209	5213	5216	5213	5253	5303	5319	5334	5335	5335
-0762) NtUserUpdateInstance                                 	4857	4911	5068	5119	5210	5214	5217	5214	5254	5304	5320	5335	5336	5336
-0763) NtUserUpdateLayeredWindow                            	4858	4912	5069	5120	5211	5215	5218	5215	5255	5305	5321	5336	5337	5337
-0764) NtUserUpdatePerUserSystemParameters                  	4859	4913	5070	5121	5212	5216	5219	5216	5256	5306	5322	5337	5338	5338
+0744) NtUserSetShellWindowEx                               	4839	4881	5037	5086	5175	5179	5181	5178	5215	5264	5280	5296	5296	5296
+0745) NtUserSetSysColors                                   	4840	4882	5038	5087	5176	5180	5182	5179	5216	5265	5281	5297	5297	5297
+0746) NtUserSetSystemCursor                                	4841	4883	5039	5088	5177	5181	5183	5180	5217	5266	5282	5298	5298	5298
+0747) NtUserSetSystemTimer                                 	4842	4884	5040	5089	5178	5182	5184	5181	5218	5267	5283	5299	5299	5299
+0748) NtUserSetThreadLayoutHandles                         	4843	4885	5042	5091	5180	5184	5186	5183	5221	5270	5286	5302	5302	5302
+0749) NtUserSetWindowRgnEx                                 	4844	4888	5048	5097	5187	5191	5193	5190	5228	5278	5294	5310	5310	5310
+0750) NtUserSetWindowStationUser                           	4845	4889	5049	5098	5189	5193	5195	5192	5230	5280	5296	5312	5312	5312
+0751) NtUserShowSystemCursor                               	4846	4900	5050	5099	5190	5194	5196	5193	5232	5282	5298	5314	5314	5314
+0752) NtUserSoundSentry                                    	4847	4901	5056	5105	5196	5200	5202	5199	5238	5288	5304	5320	5320	5320
+0753) NtUserSwitchDesktop                                  	4848	4902	5057	5106	5197	5201	5203	5200	5240	5290	5306	5322	5322	5322
+0754) NtUserTestForInteractiveUser                         	4849	4903	5058	5107	5198	5202	5205	5202	5242	5292	5308	5324	5324	5324
+0755) NtUserTrackPopupMenuEx                               	4850	4904	5059	5108	5199	5203	5206	5203	5243	5293	5309	5325	5325	5325
+0756) NtUserUnloadKeyboardLayout                           	4851	4905	5061	5112	5203	5207	5210	5207	5247	5297	5313	5329	5329	5329
+0757) NtUserUnlockWindowStation                            	4852	4906	5062	5113	5204	5208	5211	5208	5248	5298	5314	5330	5330	5330
+0758) NtUserUnregisterHotKey                               	4853	4907	5063	5114	5205	5209	5212	5209	5249	5299	5315	5331	5331	5331
+0759) NtUserUnregisterSessionPort                          	4854	4908	5064	5115	5206	5210	5213	5210	5250	5300	5316	5332	5332	5332
+0760) NtUserUnregisterUserApiHook                          	4855	4909	5065	5116	5207	5211	5214	5211	5251	5301	5317	5333	5333	5333
+0761) NtUserUpdateInputContext                             	4856	4910	5067	5118	5209	5213	5216	5213	5253	5303	5319	5335	5335	5335
+0762) NtUserUpdateInstance                                 	4857	4911	5068	5119	5210	5214	5217	5214	5254	5304	5320	5336	5336	5336
+0763) NtUserUpdateLayeredWindow                            	4858	4912	5069	5120	5211	5215	5218	5215	5255	5305	5321	5337	5337	5337
+0764) NtUserUpdatePerUserSystemParameters                  	4859	4913	5070	5121	5212	5216	5219	5216	5256	5306	5322	5338	5338	5338
 0765) NtUserUpdateWindowTransform                          	4860	4914	5071	4830	5214	5219	5222	 	 	 	 	 	 	 
-0766) NtUserUserHandleGrantAccess                          	4861	4915	5072	5124	5215	5220	5223	5219	5259	5309	5325	5340	5341	5341
-0767) NtUserValidateHandleSecure                           	4862	4916	5073	5125	5216	5221	5224	5220	5260	5310	5326	5341	5342	5342
-0768) NtUserWaitForInputIdle                               	4863	4917	5075	5127	5218	5223	5226	5222	5263	5313	5329	5344	5345	5345
-0769) NtUserWaitForMsgAndEvent                             	4864	4918	5076	5128	5219	5224	5227	5223	5264	5314	5330	5345	5346	5346
+0766) NtUserUserHandleGrantAccess                          	4861	4915	5072	5124	5215	5220	5223	5219	5259	5309	5325	5341	5341	5341
+0767) NtUserValidateHandleSecure                           	4862	4916	5073	5125	5216	5221	5224	5220	5260	5310	5326	5342	5342	5342
+0768) NtUserWaitForInputIdle                               	4863	4917	5075	5127	5218	5223	5226	5222	5263	5313	5329	5345	5345	5345
+0769) NtUserWaitForMsgAndEvent                             	4864	4918	5076	5128	5219	5224	5227	5223	5264	5314	5330	5346	5346	5346
 0770) NtGdiUnloadPrinterDriver                             	4865	4405	4730	4465	4886	4890	4881	4834	4860	4886	4894	4894	4894	4894
-0771) NtUserWindowFromPhysicalPoint                        	4866	4919	5078	4118	5221	5226	5229	5225	5267	5317	5333	5348	5349	5349
+0771) NtUserWindowFromPhysicalPoint                        	4866	4919	5078	4118	5221	5226	5229	5225	5267	5317	5333	5349	5349	5349
 0772) NtUserYieldTask                                      	4867	4920	4096	4096	4097	4097	4097	4097	4097	4097	4097	4097	4097	4097
-0773) NtUserSetClassLongPtr                                	4868	4921	5080	5132	5224	5229	5232	5228	5270	5320	5336	5351	5352	5352
-0774) NtUserSetWindowLongPtr                               	4869	4922	5081	5133	5225	5230	5233	5229	5271	5321	5337	5352	5353	5353
+0773) NtUserSetClassLongPtr                                	4868	4921	5080	5132	5224	5229	5232	5228	5270	5320	5336	5352	5352	5352
+0774) NtUserSetWindowLongPtr                               	4869	4922	5081	5133	5225	5230	5233	5229	5271	5321	5337	5353	5353	5353
 0775) NtGdiBeginGdiRendering                               	 	4397	4442	4457	4469	4470	4450	4443	4451	4475	4482	4484	4484	4484
 0776) NtGdiCreateBitmapFromDxSurface                       	 	4409	4454	4469	4481	4482	4462	4455	4463	4487	4494	4496	4496	4496
 0777) NtGdiDdCreateFullscreenSprite                        	 	4435	4482	4497	4509	4510	4491	4472	4480	4504	4511	4513	4513	4513
@@ -828,8 +828,8 @@
 0827) NtUserSetChildWindowNoActivate                       	 	4865	5014	5063	5148	5153	5152	5148	5183	5230	5247	5261	5261	5261
 0828) NtUserSetDisplayConfig                               	 	4868	5018	5067	5154	5159	5158	5155	5192	5240	5256	5270	5270	5270
 0829) NtUserSetGestureConfig                               	 	4869	5021	5070	5158	5163	5162	5159	5196	5244	5261	5275	5275	5275
-0830) NtUserSetWindowCompositionAttribute                  	 	4886	5044	5093	5183	5187	5189	5186	5224	5273	5289	5304	5305	5305
-0831) NtUserSetWindowDisplayAffinity                       	 	4887	5046	5095	5185	5189	5191	5188	5226	5275	5291	5306	5307	5307
+0830) NtUserSetWindowCompositionAttribute                  	 	4886	5044	5093	5183	5187	5189	5186	5224	5273	5289	5305	5305	5305
+0831) NtUserSetWindowDisplayAffinity                       	 	4887	5046	5095	5185	5189	5191	5188	5226	5275	5291	5307	5307	5307
 0832) NtUserSfmDestroyLogicalSurfaceBinding                	 	4890	 	 	 	 	 	 	 	 	 	 	 	 
 0833) NtUserSfmDxBindSwapChain                             	 	4891	 	 	 	 	 	 	 	 	 	 	 	 
 0834) NtUserSfmDxGetSwapChainStats                         	 	4892	 	 	 	 	 	 	 	 	 	 	 	 
@@ -999,23 +999,23 @@
 0998) NtUserSetDisplayMapping                              	 	 	5019	5068	5155	5160	5159	5156	5193	5241	5257	5271	5271	5271
 0999) NtUserSetFallbackForeground                          	 	 	5020	5069	5156	5161	5160	5157	5194	5242	5258	5272	5272	5272
 1000) NtUserSetImmersiveBackgroundWindow                   	 	 	5025	5074	5162	 	 	 	 	 	 	 	 	 
-1001) NtUserSetProcessRestrictionExemption                 	 	 	5034	5084	5173	5177	5179	5176	5213	5262	5278	5293	5294	5294
-1002) NtUserSetProcessUIAccessZorder                       	 	 	5035	5085	5174	5178	5180	5177	5214	5263	5279	5294	5295	5295
+1001) NtUserSetProcessRestrictionExemption                 	 	 	5034	5084	5173	5177	5179	5176	5213	5262	5278	5294	5294	5294
+1002) NtUserSetProcessUIAccessZorder                       	 	 	5035	5085	5174	5178	5180	5177	5214	5263	5279	5295	5295	5295
 1003) NtUserSetSensorPresence                              	 	 	5036	4097	4098	4098	4098	4098	4098	4098	4098	4098	4098	4098
-1004) NtUserSetThreadInputBlocked                          	 	 	5041	5090	5179	5183	5185	5182	5220	5269	5285	5300	5301	5301
-1005) NtUserSetWindowBand                                  	 	 	5043	5092	5182	5186	5188	5185	5223	5272	5288	5303	5304	5304
-1006) NtUserSetWindowCompositionTransition                 	 	 	5045	5094	5184	5188	5190	5187	5225	5274	5290	5305	5306	5306
-1007) NtUserSetWindowFeedbackSetting                       	 	 	5047	5096	5186	5190	5192	5189	5227	5276	5292	5307	5308	5308
-1008) NtUserShutdownBlockReasonCreate                      	 	 	5051	5100	5191	5195	5197	5194	5233	5283	5299	5314	5315	5315
-1009) NtUserShutdownBlockReasonQuery                       	 	 	5052	5101	5192	5196	5198	5195	5234	5284	5300	5315	5316	5316
-1010) NtUserShutdownReasonDestroy                          	 	 	5053	5102	5193	5197	5199	5196	5235	5285	5301	5316	5317	5317
-1011) NtUserSignalRedirectionStartComplete                 	 	 	5054	5103	5194	5198	5200	5197	5236	5286	5302	5317	5318	5318
-1012) NtUserSlicerControl                                  	 	 	5055	5104	5195	5199	5201	5198	5237	5287	5303	5318	5319	5319
-1013) NtUserUndelegateInput                                	 	 	5060	5111	5202	5206	5209	5206	5246	5296	5312	5327	5328	5328
-1014) NtUserUpdateDefaultDesktopThumbnail                  	 	 	5066	5117	5208	5212	5215	5212	5252	5302	5318	5333	5334	5334
-1015) NtUserWaitAvailableMessageEx                         	 	 	5074	5126	5217	5222	5225	5221	5262	5312	5328	5343	5344	5344
-1016) NtUserWaitForRedirectionStartComplete                	 	 	5077	5129	5220	5225	5228	5224	5265	5315	5331	5346	5347	5347
-1017) NtValidateCompositionSurfaceHandle                   	 	 	5079	5131	5222	5227	5230	5226	5268	5318	5334	5349	5350	5350
+1004) NtUserSetThreadInputBlocked                          	 	 	5041	5090	5179	5183	5185	5182	5220	5269	5285	5301	5301	5301
+1005) NtUserSetWindowBand                                  	 	 	5043	5092	5182	5186	5188	5185	5223	5272	5288	5304	5304	5304
+1006) NtUserSetWindowCompositionTransition                 	 	 	5045	5094	5184	5188	5190	5187	5225	5274	5290	5306	5306	5306
+1007) NtUserSetWindowFeedbackSetting                       	 	 	5047	5096	5186	5190	5192	5189	5227	5276	5292	5308	5308	5308
+1008) NtUserShutdownBlockReasonCreate                      	 	 	5051	5100	5191	5195	5197	5194	5233	5283	5299	5315	5315	5315
+1009) NtUserShutdownBlockReasonQuery                       	 	 	5052	5101	5192	5196	5198	5195	5234	5284	5300	5316	5316	5316
+1010) NtUserShutdownReasonDestroy                          	 	 	5053	5102	5193	5197	5199	5196	5235	5285	5301	5317	5317	5317
+1011) NtUserSignalRedirectionStartComplete                 	 	 	5054	5103	5194	5198	5200	5197	5236	5286	5302	5318	5318	5318
+1012) NtUserSlicerControl                                  	 	 	5055	5104	5195	5199	5201	5198	5237	5287	5303	5319	5319	5319
+1013) NtUserUndelegateInput                                	 	 	5060	5111	5202	5206	5209	5206	5246	5296	5312	5328	5328	5328
+1014) NtUserUpdateDefaultDesktopThumbnail                  	 	 	5066	5117	5208	5212	5215	5212	5252	5302	5318	5334	5334	5334
+1015) NtUserWaitAvailableMessageEx                         	 	 	5074	5126	5217	5222	5225	5221	5262	5312	5328	5344	5344	5344
+1016) NtUserWaitForRedirectionStartComplete                	 	 	5077	5129	5220	5225	5228	5224	5265	5315	5331	5347	5347	5347
+1017) NtValidateCompositionSurfaceHandle                   	 	 	5079	5131	5222	5227	5230	5226	5268	5318	5334	5350	5350	5350
 1018) NtCompositionInputThread                             	 	 	 	4385	4386	4386	4385	4374	4374	4375	4375	4375	4375	4375
 1019) NtCreateCompositionInputSink                         	 	 	 	4386	4387	4388	4387	4376	4376	4377	4378	4378	4378	4378
 1020) NtDCompositionCreateAndBindSharedSection             	 	 	 	4394	4397	4399	4395	4385	4385	4386	4387	4387	4387	4387
@@ -1071,9 +1071,9 @@
 1070) NtUserSetActivationFilter                            	 	 	 	5057	5142	5147	5146	5142	5177	5223	5240	5254	5254	5254
 1071) NtUserSetPrecisionTouchPadConfiguration              	 	 	 	5082	5171	5175	5176	5173	5210	5259	5275	5290	5290	5290
 1072) NtUserSetProcessDpiAwareness                         	 	 	 	5083	5172	5176	 	 	 	 	 	 	 	 
-1073) NtUserTransformPoint                                 	 	 	 	5109	5200	5204	5207	5204	5244	5294	5310	5325	5326	5326
-1074) NtUserTransformRect                                  	 	 	 	5110	5201	5205	5208	5205	5245	5295	5311	5326	5327	5327
-1075) NtUserUpdateWindowInputSinkHints                     	 	 	 	5122	5213	5217	5220	5217	5257	5307	5323	5338	5339	5339
+1073) NtUserTransformPoint                                 	 	 	 	5109	5200	5204	5207	5204	5244	5294	5310	5326	5326	5326
+1074) NtUserTransformRect                                  	 	 	 	5110	5201	5205	5208	5205	5245	5295	5311	5327	5327	5327
+1075) NtUserUpdateWindowInputSinkHints                     	 	 	 	5122	5213	5217	5220	5217	5257	5307	5323	5339	5339	5339
 1076) NtCreateImplicitCompositionInputSink                 	 	 	 	 	4389	4390	4389	4378	4378	4379	4380	4380	4380	4380
 1077) NtDCompositionCapturePointer                         	 	 	 	 	4393	4395	 	 	 	 	 	 	 	 
 1078) NtDCompositionDuplicateSwapchainHandleToDwm          	 	 	 	 	4407	4409	4404	4395	4395	4396	4397	4397	4397	4397
@@ -1169,9 +1169,9 @@
 1168) NtUserSetCoreWindowPartner                           	 	 	 	 	5151	5156	5155	5151	5186	5233	5250	5264	5264	5264
 1169) NtUserSetFeatureReportResponse                       	 	 	 	 	5157	5162	5161	5158	5195	5243	5259	5273	5273	5273
 1170) NtUserSetManipulationInputTarget                     	 	 	 	 	5165	5169	5170	5167	5204	5252	5269	5284	5284	5284
-1171) NtUserSetWindowArrangement                           	 	 	 	 	5181	5185	5187	5184	5222	5271	5287	5302	5303	5303
-1172) NtUserSetWindowShowState                             	 	 	 	 	5188	5192	5194	5191	5229	5279	5295	5310	5311	5311
-1173) NtVisualCaptureBits                                  	 	 	 	 	5223	5228	5231	5227	5269	5319	5335	5350	5351	5351
+1171) NtUserSetWindowArrangement                           	 	 	 	 	5181	5185	5187	5184	5222	5271	5287	5303	5303	5303
+1172) NtUserSetWindowShowState                             	 	 	 	 	5188	5192	5194	5191	5229	5279	5295	5311	5311	5311
+1173) NtVisualCaptureBits                                  	 	 	 	 	5223	5228	5231	5227	5269	5319	5335	5351	5351	5351
 1174) NtCompositionSetDropTarget                           	 	 	 	 	 	4387	4386	4375	4375	4376	4376	4376	4376	4376
 1175) NtDCompositionAttachMouseWheelToHwnd                 	 	 	 	 	 	4393	 	 	 	 	 	 	 	 
 1176) NtGdiDdDDIFlushHeapTransitions                       	 	 	 	 	 	4555	4537	4521	4538	4562	4569	4571	4571	4571
@@ -1180,7 +1180,7 @@
 1179) NtGdiGetCertificateSizeByHandle                      	 	 	 	 	 	4780	4768	4716	4742	4768	4776	4776	4776	4776
 1180) NtSetCompositionSurfaceBufferCompositionModeAndOrientation	 	 	 	 	 	4919	4911	 	 	 	 	 	 	 
 1181) NtUserRemoveInjectionDevice                          	 	 	 	 	 	5143	5141	5137	5172	5217	5233	5246	5246	5246
-1182) NtUserUpdateWindowTrackingInfo                       	 	 	 	 	 	5218	5221	5218	5258	5308	5324	5339	5340	5340
+1182) NtUserUpdateWindowTrackingInfo                       	 	 	 	 	 	5218	5221	5218	5258	5308	5324	5340	5340	5340
 1183) NtDCompositionProcessChannelBatchBuffer              	 	 	 	 	 	 	4413	4404	4404	4406	4407	4407	4407	4407
 1184) NtGdiCreateOPMProtectedOutput                        	 	 	 	 	 	 	4468	4461	4469	4493	4500	4502	4502	4502
 1185) NtGdiDdDDICheckMultiPlaneOverlaySupport3             	 	 	 	 	 	 	4504	4484	4493	4517	4524	4526	4526	4526
@@ -1211,7 +1211,7 @@
 1210) NtUserSetInteractiveCtrlRotationAngle                	 	 	 	 	 	 	5167	5164	5201	5249	5266	5280	5280	5280
 1211) NtUserSetProcessDpiAwarenessContext                  	 	 	 	 	 	 	5177	5174	5211	5260	5276	5291	5291	5291
 1212) NtUserSetProcessInteractionFlags                     	 	 	 	 	 	 	5178	5175	5212	5261	5277	5292	5292	5292
-1213) NtUserSystemParametersInfoForDpi                     	 	 	 	 	 	 	5204	5201	5241	5291	5307	5322	5323	5323
+1213) NtUserSystemParametersInfoForDpi                     	 	 	 	 	 	 	5204	5201	5241	5291	5307	5323	5323	5323
 1214) NtDCompositionCommitSynchronizationObject            	 	 	 	 	 	 	 	4382	4382	4383	4384	4384	4384	4384
 1215) NtDCompositionCreateSharedVisualHandle               	 	 	 	 	 	 	 	4389	4389	4390	4391	 	 	 
 1216) NtDCompositionSetChildRootVisual                     	 	 	 	 	 	 	 	4413	4413	4415	4416	4416	4416	4416
@@ -1323,11 +1323,11 @@
 1322) NtUserReleaseDC                                      	 	 	 	 	 	 	 	 	5165	5210	5226	5239	5239	5239
 1323) NtUserSetCursorPos                                   	 	 	 	 	 	 	 	 	5188	5235	5252	5266	5266	5266
 1324) NtUserSetDesktopColorTransform                       	 	 	 	 	 	 	 	 	5189	5236	5253	5267	5267	5267
-1325) NtUserSetTargetForResourceBrokering                  	 	 	 	 	 	 	 	 	5219	5268	5284	5299	5300	5300
-1326) NtUserShowCursor                                     	 	 	 	 	 	 	 	 	5231	5281	5297	5312	5313	5313
-1327) NtUserStopAndEndInertia                              	 	 	 	 	 	 	 	 	5239	5289	5305	5320	5321	5321
-1328) NtUserWOWCleanup                                     	 	 	 	 	 	 	 	 	5261	5311	5327	5342	5343	5343
-1329) NtUserWindowFromDC                                   	 	 	 	 	 	 	 	 	5266	5316	5332	5347	5348	5348
+1325) NtUserSetTargetForResourceBrokering                  	 	 	 	 	 	 	 	 	5219	5268	5284	5300	5300	5300
+1326) NtUserShowCursor                                     	 	 	 	 	 	 	 	 	5231	5281	5297	5313	5313	5313
+1327) NtUserStopAndEndInertia                              	 	 	 	 	 	 	 	 	5239	5289	5305	5321	5321	5321
+1328) NtUserWOWCleanup                                     	 	 	 	 	 	 	 	 	5261	5311	5327	5343	5343	5343
+1329) NtUserWindowFromDC                                   	 	 	 	 	 	 	 	 	5266	5316	5332	5348	5348	5348
 1330) NtCloseCompositionInputSink                          	 	 	 	 	 	 	 	 	 	4374	4374	4374	4374	4374
 1331) NtDCompositionCreateSynchronizationObject            	 	 	 	 	 	 	 	 	 	4391	4392	4392	4392	4392
 1332) NtDCompositionGetBatchId                             	 	 	 	 	 	 	 	 	 	4399	4399	4399	4399	4399
@@ -1381,7 +1381,7 @@
 1380) NtUserSetBridgeWindowChild                           	 	 	 	 	 	 	 	 	 	5227	5244	5258	5258	5258
 1381) NtUserSetDimUndimTransitionTime                      	 	 	 	 	 	 	 	 	 	5238	 	 	 	 
 1382) NtUserSetMonitorBrightness                           	 	 	 	 	 	 	 	 	 	5257	 	 	 	 
-1383) NtUserSetWindowGroup                                 	 	 	 	 	 	 	 	 	 	5277	5293	5308	5309	5309
+1383) NtUserSetWindowGroup                                 	 	 	 	 	 	 	 	 	 	5277	5293	5309	5309	5309
 1384) NtConfigureInputSpace                                	 	 	 	 	 	 	 	 	 	 	4377	4377	4377	4377
 1385) NtDCompositionGetMaterialProperty                    	 	 	 	 	 	 	 	 	 	 	4406	4406	4406	4406
 1386) NtDCompositionSetChannelConnectionId                 	 	 	 	 	 	 	 	 	 	 	4415	4415	4415	4415
@@ -1432,4 +1432,4 @@
 1431) NtUserQueryActivationObject                          	 	 	 	 	 	 	 	 	 	 	 	5215	5215	5215
 1432) NtUserRemoveVisualIdentifier                         	 	 	 	 	 	 	 	 	 	 	 	5247	5247	5247
 1433) NtUserSetMagnificationDesktopMagnifierOffsetsDWMUpdated	 	 	 	 	 	 	 	 	 	 	 	5283	5283	5283
-1434) NtUserSetProcessMousewheelRoutingMode                	 	 	 	 	 	 	 	 	 	 	 	 	5293	5293
+1434) NtUserSetProcessMousewheelRoutingMode                	 	 	 	 	 	 	 	 	 	 	 	5293	5293	5293
