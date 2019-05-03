@@ -4,9 +4,9 @@
 *
 *  TITLE:       MAIN.C
 *
-*  VERSION:     1.14
+*  VERSION:     1.20
 *
-*  DATE:        20 Jan 2019
+*  DATE:        03 May 2019
 *
 * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 * ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -18,9 +18,6 @@
 #include "main.h"
 
 #define PRINT_FMT  L"%s\t%u"
-
-HANDLE g_ConOut;
-BOOL g_ConsoleOutput = FALSE;
 
 SYMBOL_ENTRY g_SymbolsHead;
 SERVICE_ENTRY g_ServicesHead;
@@ -502,7 +499,7 @@ LPVOID LdrGetProcAddress(
         FunctionAddress = NULL;
     }
     return FunctionAddress;
-    }
+}
 
 /*
 * LdrMapInputFile
@@ -548,6 +545,64 @@ PVOID LdrMapInputFile(
 }
 
 /*
+* IATEntryToImport
+*
+* Purpose:
+*
+* Resolve function name.
+*
+*/
+_Success_(return != NULL)
+LPCSTR IATEntryToImport(
+    _In_ LPVOID Module,
+    _In_ LPVOID IATEntry,
+    _Out_opt_ LPCSTR *ImportModuleName
+)
+{
+    PIMAGE_NT_HEADERS           NtHeaders;
+    PIMAGE_IMPORT_DESCRIPTOR    impd;
+    ULONG_PTR                   *rname, imprva;
+    LPVOID                      *raddr;
+
+    NtHeaders = LdrImageNtHeader(Module);
+    if (NtHeaders->OptionalHeader.NumberOfRvaAndSizes <= IMAGE_DIRECTORY_ENTRY_IMPORT)
+        return NULL;
+
+    imprva = NtHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
+    if (imprva == 0)
+        return NULL;
+
+    impd = (PIMAGE_IMPORT_DESCRIPTOR)((ULONG_PTR)Module + imprva);
+
+    while (impd->Name != 0) {
+        raddr = (LPVOID *)((ULONG_PTR)Module + impd->FirstThunk);
+        if (impd->OriginalFirstThunk == 0)
+            rname = (ULONG_PTR *)raddr;
+        else
+            rname = (ULONG_PTR *)((ULONG_PTR)Module + impd->OriginalFirstThunk);
+
+        while (*rname != 0) {
+            if (IATEntry == raddr)
+            {
+                if (((*rname) & IMAGE_ORDINAL_FLAG) == 0)
+                {
+                    if (ImportModuleName) {
+                        *ImportModuleName = (LPCSTR)((ULONG_PTR)Module + impd->Name);
+                    }
+                    return (LPCSTR)&((PIMAGE_IMPORT_BY_NAME)((ULONG_PTR)Module + *rname))->Name;
+                }
+            }
+
+            ++rname;
+            ++raddr;
+        }
+        ++impd;
+    }
+
+    return NULL;
+}
+
+/*
 * wscg10
 *
 * Purpose:
@@ -580,24 +635,27 @@ void wscg10(
 
     hde64s hs;
 
+    ULONG_PTR IATEntry;
+    PCHAR ServiceName;
+
     do {
 
         pvImageBase = LdrMapInputFile(lpszWin32kImage);
         if (pvImageBase == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
-            cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+            cuiPrintText(L"wscg: Cannot load input file: ", TRUE);
+            cuiPrintTextLastError(TRUE);
             break;
         }
 
         NtHeaders = LdrImageNtHeader(pvImageBase);
         if (NtHeaders == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: invalid input file.", g_ConsoleOutput, TRUE);
+            cuiPrintText(L"wscg: invalid input file.", TRUE);
             break;
         }
 
         ServiceLimit = (ULONG*)LdrGetProcAddress(pvImageBase, "W32pServiceLimit");
         if (ServiceLimit == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit not found.", g_ConsoleOutput, TRUE);
+            cuiPrintText(L"wscg: W32pServiceLimit not found.", TRUE);
             break;
         }
 
@@ -605,7 +663,7 @@ void wscg10(
 
         ServiceTable = (ULONG_PTR *)LdrGetProcAddress(pvImageBase, "W32pServiceTable");
         if (ServiceTable == NULL) {
-            cuiPrintText(g_ConOut, L"wscg: W32pServiceTable not found.", g_ConsoleOutput, TRUE);
+            cuiPrintText(L"wscg: W32pServiceTable not found.", TRUE);
             break;
         }
 
@@ -630,23 +688,36 @@ void wscg10(
 #endif
                         break;
                     }
-                    Address = (ULONG_PTR)pvImageBase + *(ULONG_PTR*)(pfn + hs.len + *(DWORD*)(pfn + (hs.len - 4)));
-                    ImportEntry = (IMAGE_IMPORT_BY_NAME *)Address;
-                    if (ImportEntry) {
-                        Length = 1 + _strlen_a(ImportEntry->Name);
+
+                    ServiceName = NULL;
+
+                    if (Win32kBuild > 18885) {
+                        IATEntry = (ULONG_PTR)pfn + hs.len + *(DWORD*)(pfn + (hs.len - 4));
+                        ServiceName = (PCHAR)IATEntryToImport(pvImageBase, (LPVOID)IATEntry, NULL);
+                    }
+                    else {
+                        Address = (ULONG_PTR)pvImageBase + *(ULONG_PTR*)(pfn + hs.len + *(DWORD*)(pfn + (hs.len - 4)));
+                        ImportEntry = (IMAGE_IMPORT_BY_NAME *)Address;
+                        if (ImportEntry) {
+                            ServiceName = (PCHAR)&ImportEntry->Name;
+                        }
+                    }
+
+                    if (ServiceName) {
+                        Length = 1 + _strlen_a(ServiceName);
                         lpBuffer = HeapAlloc(ProcessHeap, HEAP_ZERO_MEMORY, (Length * sizeof(WCHAR)) + 100);
                         if (lpBuffer) {
 
                             MultiByteToWideChar(CP_ACP,
                                 0,
-                                (LPCSTR)&ImportEntry->Name,
+                                (LPCSTR)ServiceName,
                                 -1,
                                 lpBuffer,
                                 (INT)Length);
 
                             _strcat_w(lpBuffer, L"\t");
                             ultostr_w(i + W32SYSCALLSTART, _strend_w(lpBuffer));
-                            cuiPrintText(g_ConOut, lpBuffer, g_ConsoleOutput, TRUE);
+                            cuiPrintText(lpBuffer, TRUE);
                             HeapFree(ProcessHeap, 0, lpBuffer);
                         }
                     }
@@ -655,18 +726,14 @@ void wscg10(
 
         }
         __except (EXCEPTION_EXECUTE_HANDLER) {
-#ifdef _DEBUG
-            OutputDebugString(L"wscg: exception during parsing win32k.sys");
-#else
-			;
-#endif
+            cuiPrintText(L"wscg: exception during parsing win32k.sys", TRUE);
         }
 
-    } while (bCond); 
-    
+    } while (bCond);
+
     if (pvImageBase != NULL)
         UnmapViewOfFile(pvImageBase);
-}
+    }
 
 /*
 * wscg
@@ -695,7 +762,7 @@ void wscg(
         return;
 
     if (!GetWin32kBuildVersion(lpszWin32kImage, &Win32kBuild)) {
-        cuiPrintText(g_ConOut, L"wscg: Cannot query build information from input file.", g_ConsoleOutput, TRUE);
+        cuiPrintText(L"wscg: Cannot query build information from input file.", TRUE);
         return;
     }
 
@@ -708,7 +775,7 @@ void wscg(
 
         if (!InitDbgHelp()) {
             _strcpy_w(szSymbolName, L"wscg: InitDbgHelp failed, make sure required dlls are in %wscg%\\Symdll folder.");
-            cuiPrintText(g_ConOut, szSymbolName, g_ConsoleOutput, TRUE);
+            cuiPrintText(szSymbolName, TRUE);
             return;
         }
 
@@ -727,44 +794,44 @@ void wscg(
             _strcat_w(szFullSymbolInfo, L"Symbols");
             if (!CreateDirectoryW(&szFullSymbolInfo[4], NULL)) {
                 if (GetLastError() != ERROR_ALREADY_EXISTS) {
-                    cuiPrintText(g_ConOut, L"wscg: Cannot create symbols directory: ", g_ConsoleOutput, TRUE);
-                    cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                    cuiPrintText(L"wscg: Cannot create symbols directory: ", TRUE);
+                    cuiPrintTextLastError(TRUE);
                     __leave;
                 }
             }
             _strcat_w(szFullSymbolInfo, L"*https://msdl.microsoft.com/download/symbols");
             if (!pSymInitializeW(hSym, szFullSymbolInfo, FALSE)) {
-                cuiPrintText(g_ConOut, L"wscg: SymInitialize failed.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: SymInitialize failed.", TRUE);
                 __leave;
             }
 
             pvImageBase = LdrMapInputFile(lpszWin32kImage);
             if (pvImageBase == NULL) {
-                cuiPrintText(g_ConOut, L"wscg: Cannot load input file: ", g_ConsoleOutput, TRUE);
-                cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: Cannot load input file: ", TRUE);
+                cuiPrintTextLastError(TRUE);
                 __leave;
             }
 
             NtHeaders = LdrImageNtHeader(pvImageBase);
             if (NtHeaders == NULL) {
-                cuiPrintText(g_ConOut, L"wscg: invalid input file.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: invalid input file.", TRUE);
                 __leave;
             }
 
             if (!pSymLoadModuleExW(hSym, NULL, lpszWin32kImage, NULL, (DWORD64)pvImageBase, 0, NULL, 0)) {
-                cuiPrintText(g_ConOut, L"wscg: SymLoadModuleEx failed for input file with message: ", g_ConsoleOutput, TRUE);
-                cuiPrintTextLastError(g_ConOut, g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: SymLoadModuleEx failed for input file with message: ", TRUE);
+                cuiPrintTextLastError(TRUE);
                 __leave;
             }
 
             if (!pSymEnumSymbolsW(hSym, (DWORD64)pvImageBase, NULL, SymEnumSymbolsProc, NULL)) {
-                cuiPrintText(g_ConOut, L"wscg: SymEnumSymbols failed.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: SymEnumSymbols failed.", TRUE);
                 __leave;
             }
 
             pW32pServiceLimit = (ULONG *)SymbolAddressFromName(L"W32pServiceLimit");
             if (pW32pServiceLimit == NULL) {
-                cuiPrintText(g_ConOut, L"wscg: W32pServiceLimit symbol not found.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: W32pServiceLimit symbol not found.", TRUE);
                 __leave;
             }
 
@@ -772,7 +839,7 @@ void wscg(
 
             pW32pServiceTable = (DWORD64 *)SymbolAddressFromName(L"W32pServiceTable");
             if (pW32pServiceTable == NULL) {
-                cuiPrintText(g_ConOut, L"wscg: W32pServiceTable symbol not found.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: W32pServiceTable symbol not found.", TRUE);
                 __leave;
             }
 
@@ -787,7 +854,7 @@ void wscg(
                 if (!bRet)
                     _strcpy_w(szSymbolName, L"UnknownSyscall");
                 wsprintfW(szFullSymbolInfo, PRINT_FMT, szSymbolName, W32SYSCALLSTART + i);
-                cuiPrintText(g_ConOut, szFullSymbolInfo, g_ConsoleOutput, TRUE);
+                cuiPrintText(szFullSymbolInfo, TRUE);
             }
         }
         __finally {
@@ -812,21 +879,10 @@ void main()
 {
     LPWSTR *szArglist;
     INT nArgs = 0;
-    DWORD dwTemp;
-    WCHAR BE = 0xFEFF;
 
     __security_init_cookie();
 
-    g_ConOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    g_ConsoleOutput = TRUE;
-    if (!GetConsoleMode(g_ConOut, &dwTemp)) {
-        g_ConsoleOutput = FALSE;
-    }
-    SetConsoleMode(g_ConOut, ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT | ENABLE_PROCESSED_OUTPUT);
-    if (g_ConsoleOutput == FALSE) {
-        WriteFile(g_ConOut, &BE, sizeof(WCHAR), &dwTemp, NULL);
-    }
+    cuiInitialize(FALSE, NULL);
 
     szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
     if (szArglist) {
@@ -835,11 +891,11 @@ void main()
                 wscg(szArglist[1]);
             }
             else {
-                cuiPrintText(g_ConOut, L"wscg: Input File not found.", g_ConsoleOutput, TRUE);
+                cuiPrintText(L"wscg: Input File not found.", TRUE);
             }
         }
         else {
-            cuiPrintText(g_ConOut, L"Usage: wscg64 win32kfilename", g_ConsoleOutput, TRUE);
+            cuiPrintText(L"Usage: wscg64 win32kfilename", TRUE);
         }
         LocalFree(szArglist);
     }
