@@ -20,7 +20,8 @@
 + Windows 10 RS5 build 17763;
 + Windows 10 19H1 build 18362;
 + Windows 10 20H1 build 18894;
-+ Windows 10 20H1 build 18912.
++ Windows 10 20H1 build 18912;
++ Windows 10 20H1 build 18932.
 
 ** located in Tables\ntos
 
@@ -39,7 +40,8 @@
 + Windows 10 RS5 build 17763;
 + Windows 10 19H1 build 18362;
 + Windows 10 20H1 build 18894;
-+ Windows 10 20H1 build 18912.
++ Windows 10 20H1 build 18912;
++ Windows 10 20H1 build 18932.
 
 ** located in Tables\win32k
 
