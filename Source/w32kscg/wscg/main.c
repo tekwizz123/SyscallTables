@@ -4,9 +4,9 @@
 *
 *  TITLE:       MAIN.C
 *
-*  VERSION:     1.20
+*  VERSION:     1.21
 *
-*  DATE:        03 May 2019
+*  DATE:        16 July 2019
 *
 * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 * ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -767,7 +767,14 @@ void wscg(
     }
 
     if (Win32kBuild > 9600) {
-        wscg10(lpszWin32kImage, Win32kBuild);
+        if (Win32kBuild >= 18936) {
+            _strcpy_w(szSymbolName, L"wscg: For newest Windows 10 20H1 builds (>= 18936) instead use SCG with target win32u.dll as parameter.");
+            cuiPrintText(szSymbolName, TRUE);
+            return;
+        }
+        else {
+            wscg10(lpszWin32kImage, Win32kBuild);
+        }
     }
     else {
 

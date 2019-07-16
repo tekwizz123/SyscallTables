@@ -4,9 +4,9 @@
 *
 *  TITLE:       MAIN.C
 *
-*  VERSION:     1.01
+*  VERSION:     1.02
 *
-*  DATE:        20 Jan 2019
+*  DATE:        16 July 2019
 *
 *  Ntdll/Win32u Syscall dumper
 *  Based on gr8 scg project
@@ -294,7 +294,7 @@ void main()
             scg(szInputFile);
         }
         else {
-            cuiPrintTextA(g_ConOut, "Syscall Generator\r\nUsage: scg filename", g_ConsoleOutput, FALSE);
+            cuiPrintTextA(g_ConOut, "Syscall Generator (NTOS/WIN32K)\r\nSupports both ntdll/win32u dlls as targets\r\nUsage: scg filename", g_ConsoleOutput, FALSE);
         }
     }
     ExitProcess(0);
