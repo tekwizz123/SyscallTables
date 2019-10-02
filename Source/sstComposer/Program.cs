@@ -1,10 +1,28 @@
-﻿using System;
+﻿/*******************************************************************************
+*
+*  (C) COPYRIGHT AUTHORS, 2014 - 2019
+*
+*  TITLE:       PROGRAM.CS
+*
+*  VERSION:     1.20
+*
+*  DATE:        02 Oct 2019
+*
+*  SSTC entrypoint.
+* 
+* THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+* ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+* TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+* PARTICULAR PURPOSE.
+*
+*******************************************************************************/
+
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace sstc
 {
@@ -25,13 +43,6 @@ namespace sstc
                     return i;
             }
             return -1;
-        }
-
-        static void PutSpaces(ref string s, int start)
-        {
-            int sz = s.Length;
-            for (int k = start; k > sz; k--)
-                s += " ";
         }
 
         public class ItemsComparer : IComparer
@@ -56,35 +67,33 @@ namespace sstc
             if (args.Length == 0)
             {
                 System.Console.WriteLine("Please enter a type of generated report.");
-                System.Console.WriteLine("Usage: sstc -t | -h [-w]");
+                System.Console.WriteLine("Usage: sstc -m | -h [-w]");
                 System.Console.ReadKey();
                 return;
             }
-            int st = 7, sk;
+
             string opt = "";
             string cmd = args[0];
             if (args.Length > 1)
             {
                 opt = args[1];
             }
-            if (cmd != "-t" && cmd != "-h")
+            if (cmd != "-m" && cmd != "-h")
             {
-                System.Console.WriteLine("Invalid report type key, supported types keys are text [-t] and html [-h].");
+                System.Console.WriteLine("Invalid report type key, supported types keys are markdown [-m] and html [-h].");
                 System.Console.ReadKey();
                 return;
             }
 
-            string LookupDirectory;
+            string LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\";
 
             if (opt != "-w")
             {
-                LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\ntos\\";
-                sk = 6;
+                LookupDirectory += "ntos\\";
             }
             else
             {
-                LookupDirectory = Directory.GetCurrentDirectory() + "\\tables\\win32k\\";
-                sk = 0;
+                LookupDirectory += "win32k\\";
             }
 
             string[] Tables;
@@ -107,16 +116,22 @@ namespace sstc
 
             List<sstTable> DataItems = new List<sstTable>();
             int n = 0, id;
-            string header = "ServiceName";
-            for (int i = 0; i < st; i++)
-                header += "\t";
 
-            int max = 0;
+            //
+            // Makrdown header.
+            //
+
+            string MarkdownHeader = "| # | ServiceName |";
+            string MarkdownSubHeader = "| --- | --- | ";
+
+            //
+            // Parse files into internal array.
+            //
 
             foreach (var sName in Tables)
             {
                 string[] fData;
-                header += Path.GetFileNameWithoutExtension(sName);
+                MarkdownHeader += (Path.GetFileNameWithoutExtension(sName) + " | ");
 
                 try
                 {
@@ -131,8 +146,6 @@ namespace sstc
 
                         syscall_id = Convert.ToInt32(fData[i].Substring(u));
                         syscall_name = fData[i].Substring(0, u - 1);
-
-                        if (syscall_name.Length > max) max = syscall_name.Length;
 
                         id = IndexOfItem(syscall_name, DataItems);
                         if (id != -1)
@@ -158,44 +171,43 @@ namespace sstc
                     System.Console.WriteLine(e.Message);
                 }
                 n++;
-                header += "\t";
+                MarkdownSubHeader += (" --- | ");
             }
-
-            int sl = max + sk;
 
             StreamWriter file;
 
             try
             {
-                if (cmd == "-t")
+                if (cmd == "-m")
                 {
                     if (opt != "-w")
                     {
-                        file = new StreamWriter("syscalls.txt", false, Encoding.UTF8);
+                        file = new StreamWriter("syscalls.md", false, Encoding.UTF8);
                     }
                     else
                     {
-                        file = new StreamWriter("w32ksyscalls.txt", false, Encoding.UTF8);
+                        file = new StreamWriter("w32ksyscalls.md", false, Encoding.UTF8);
                     }
-                    file.WriteLine(header);
+
+                    file.WriteLine(MarkdownHeader);
+                    file.WriteLine(MarkdownSubHeader);
 
                     foreach (var Entry in DataItems)
                     {
                         count += 1;
 
-                        var s = count.ToString("0000") + ") " + Entry.ServiceName;
+                        var s = "| " + count.ToString("0000") + " | ";
+                        s += Entry.ServiceName + " | ";
 
-                        PutSpaces(ref s, sl);
                         for (int i = 0; i < fcount; i++)
                         {
-                            s += "\t";
                             if (Entry.Indexes[i] != -1)
                             {
-                                s += Entry.Indexes[i].ToString();
+                                s += Entry.Indexes[i].ToString() + " | ";
                             }
                             else
                             {
-                                s += " ";
+                                s += "  | ";
                             }
                         }
                         file.WriteLine(s);
@@ -207,15 +219,15 @@ namespace sstc
                 if (cmd == "-h")
                 {
                     string ReportHead = "<!DOCTYPE html><html><head>" +
-                                        "<style>"+
-                                        "table, th, td {"+
-                                        "border: 1px solid black;"+
+                                        "<style>" +
+                                        "table, th, td {" +
+                                        "border: 1px solid black;" +
                                         "border-collapse: collapse;" +
                                         "} th, td {" +
-                                        "padding: 5px;"+
+                                        "padding: 5px;" +
                                         "} table tr:nth-child(even) { background-color: #eee;}" +
                                         "table tr:nth-child(odd) { background-color:#fff;}" +
-                                        "table th { background-color: white; color: black; }" +                                         
+                                        "table th { background-color: white; color: black; }" +
                                         "</style></head><body>";
 
                     string ColStart = "<td>";
@@ -267,7 +279,7 @@ namespace sstc
                                 item += " ";
                             }
                             item += ColEnd;
-                         }
+                        }
                         item += RowEnd;
                     }
                     file.WriteLine(item);
