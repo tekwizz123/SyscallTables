@@ -24,6 +24,8 @@
 
 ** located in Tables\ntos
 
+**View online** https://hfiref0x.github.io/syscalls.html
+
 ## Win32k service tables
 
 + Windows Vista RTM build 6000;
@@ -42,6 +44,8 @@
 + Windows 10 20H1 build 19013.
 
 ** located in Tables\win32k
+
+**View online** https://hfiref0x.github.io/w32ksyscalls.html
 
 # Usage
 
