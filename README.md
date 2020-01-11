@@ -21,7 +21,8 @@
 + Windows 10 19H1 build 18362;
 + Windows 10 19H2 build 18363;
 + Windows 10 20H1 build 19037;
-+ Windows 10 20H2 build 19536.
++ Windows 10 20H2 build 19536;
++ Windows 10 20H2 build 19541.
 
 ** located in Tables\ntos
 
@@ -43,7 +44,8 @@
 + Windows 10 19H1 build 18362;
 + Windows 10 19H2 build 18363;
 + Windows 10 20H1 build 19037;
-+ Windows 10 20H2 build 19536.
++ Windows 10 20H2 build 19536;
++ Windows 10 20H2 build 19541.
 
 ** located in Tables\win32k
 
